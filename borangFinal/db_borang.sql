@@ -25,11 +25,14 @@ CREATE TABLE `mst_butir` (
   `title` varchar(500) DEFAULT NULL,
   `standar_id` int(4) DEFAULT NULL,
   `type_borang` int(4) DEFAULT NULL,
+  `field` varchar(1000) DEFAULT NULL,
+  `tabel` varchar(1000) DEFAULT NULL,
+  `condition` varchar(1000) DEFAULT NULL,
   PRIMARY KEY (`butir_id`),
   KEY `FK_mst_butir` (`standar_id`),
   KEY `FK_mst_butir_type_borang` (`type_borang`),
-  CONSTRAINT `FK_mst_butir_type_borang` FOREIGN KEY (`type_borang`) REFERENCES `mst_typeborang` (`type_id`),
-  CONSTRAINT `FK_mst_butir` FOREIGN KEY (`standar_id`) REFERENCES `mst_standar` (`standar_id`)
+  CONSTRAINT `FK_mst_butir` FOREIGN KEY (`standar_id`) REFERENCES `mst_standar` (`standar_id`),
+  CONSTRAINT `FK_mst_butir_type_borang` FOREIGN KEY (`type_borang`) REFERENCES `mst_typeborang` (`type_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `mst_butir` */
@@ -51,6 +54,8 @@ CREATE TABLE `mst_faculty` (
 /*Data for the table `mst_faculty` */
 
 LOCK TABLES `mst_faculty` WRITE;
+
+insert  into `mst_faculty`(`faculty_id`,`faculty_name`) values ('FK001','Ilmu Komputer'),('FK002','Ekonomi'),('FK003','Psikologi'),('FK004','Sastra');
 
 UNLOCK TABLES;
 
@@ -124,6 +129,8 @@ CREATE TABLE `mst_major` (
 /*Data for the table `mst_major` */
 
 LOCK TABLES `mst_major` WRITE;
+
+insert  into `mst_major`(`major_id`,`major_name`,`study_id`,`faculty_id`) values ('PS001','Manajemen Informatika',3,'FK001'),('PS002','Teknik Informatika',5,'FK001');
 
 UNLOCK TABLES;
 
@@ -204,12 +211,9 @@ DROP TABLE IF EXISTS `permission`;
 
 CREATE TABLE `permission` (
   `permission_id` int(4) NOT NULL AUTO_INCREMENT,
-  `role_id` int(4) DEFAULT NULL,
-  `permission` text,
-  PRIMARY KEY (`permission_id`),
-  KEY `FK_permission` (`role_id`),
-  CONSTRAINT `FK_permission` FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `permission_desc` text,
+  PRIMARY KEY (`permission_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 /*Data for the table `permission` */
 
@@ -225,13 +229,28 @@ CREATE TABLE `role` (
   `role_id` int(4) NOT NULL AUTO_INCREMENT,
   `role_name` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`role_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 /*Data for the table `role` */
 
 LOCK TABLES `role` WRITE;
 
-insert  into `role`(`role_id`,`role_name`) values (1,'Kaprodi'),(2,'Akademik'),(3,'HRD'),(4,'Keuangan'),(5,'Logistik'),(6,'Perpustakaan');
+insert  into `role`(`role_id`,`role_name`) values (1,'Kaprodi'),(2,'Akademik'),(3,'HRD'),(4,'Keuangan'),(5,'Logistik'),(6,'Perpustakaan'),(7,'Admin');
+
+UNLOCK TABLES;
+
+/*Table structure for table `role_permission` */
+
+DROP TABLE IF EXISTS `role_permission`;
+
+CREATE TABLE `role_permission` (
+  `role_id` int(4) DEFAULT NULL,
+  `permission_id` int(4) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `role_permission` */
+
+LOCK TABLES `role_permission` WRITE;
 
 UNLOCK TABLES;
 
@@ -244,8 +263,8 @@ CREATE TABLE `tbl_butirstudy` (
   `study_id` int(4) DEFAULT NULL,
   KEY `FK_tbl_butirstudy_butir` (`butir_id`),
   KEY `FK_tbl_butirstudy_study` (`study_id`),
-  CONSTRAINT `FK_tbl_butirstudy_study` FOREIGN KEY (`study_id`) REFERENCES `mst_study` (`study_id`),
-  CONSTRAINT `FK_tbl_butirstudy_butir` FOREIGN KEY (`butir_id`) REFERENCES `mst_butir` (`butir_id`)
+  CONSTRAINT `FK_tbl_butirstudy_butir` FOREIGN KEY (`butir_id`) REFERENCES `mst_butir` (`butir_id`),
+  CONSTRAINT `FK_tbl_butirstudy_study` FOREIGN KEY (`study_id`) REFERENCES `mst_study` (`study_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `tbl_butirstudy` */
@@ -270,8 +289,8 @@ CREATE TABLE `tbl_historystudy` (
   PRIMARY KEY (`studyhistory_id`),
   KEY `FK_tbl_historystudy_lecturer` (`lecturer_id`),
   KEY `FK_tbl_historystudy_study` (`study_id`),
-  CONSTRAINT `FK_tbl_historystudy_study` FOREIGN KEY (`study_id`) REFERENCES `mst_study` (`study_id`),
-  CONSTRAINT `FK_tbl_historystudy_lecturer` FOREIGN KEY (`lecturer_id`) REFERENCES `mst_lecturer` (`lecturer_id`)
+  CONSTRAINT `FK_tbl_historystudy_lecturer` FOREIGN KEY (`lecturer_id`) REFERENCES `mst_lecturer` (`lecturer_id`),
+  CONSTRAINT `FK_tbl_historystudy_study` FOREIGN KEY (`study_id`) REFERENCES `mst_study` (`study_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `tbl_historystudy` */
@@ -297,6 +316,27 @@ LOCK TABLES `tbl_instrumen` WRITE;
 
 UNLOCK TABLES;
 
+/*Table structure for table `tbl_usermajor` */
+
+DROP TABLE IF EXISTS `tbl_usermajor`;
+
+CREATE TABLE `tbl_usermajor` (
+  `user_id` int(4) DEFAULT NULL,
+  `major_id` varchar(5) DEFAULT NULL,
+  KEY `FK_tbl_usermajor_user` (`user_id`),
+  KEY `FK_tbl_usermajor_major` (`major_id`),
+  CONSTRAINT `FK_tbl_usermajor_major` FOREIGN KEY (`major_id`) REFERENCES `mst_major` (`major_id`),
+  CONSTRAINT `FK_tbl_usermajor_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `tbl_usermajor` */
+
+LOCK TABLES `tbl_usermajor` WRITE;
+
+insert  into `tbl_usermajor`(`user_id`,`major_id`) values (2,'PS001'),(3,'PS002');
+
+UNLOCK TABLES;
+
 /*Table structure for table `user` */
 
 DROP TABLE IF EXISTS `user`;
@@ -308,14 +348,19 @@ CREATE TABLE `user` (
   `firstname` varchar(100) DEFAULT NULL,
   `lastname` varchar(100) DEFAULT NULL,
   `role_id` int(4) DEFAULT NULL,
+  `gender_id` int(4) DEFAULT NULL,
   PRIMARY KEY (`user_id`),
   KEY `FK_user` (`role_id`),
+  KEY `FK_user_gender` (`gender_id`),
+  CONSTRAINT `FK_user_gender` FOREIGN KEY (`gender_id`) REFERENCES `mst_gender` (`gender_id`),
   CONSTRAINT `FK_user` FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 /*Data for the table `user` */
 
 LOCK TABLES `user` WRITE;
+
+insert  into `user`(`user_id`,`username`,`pwd`,`firstname`,`lastname`,`role_id`,`gender_id`) values (1,'admin','admin','Teguh','Prabowo',7,1),(2,'d3mi','d3mi','Erna','Hikmawati',1,2),(3,'s1ti','s1ti','Soleh','Sabarudin',1,1),(4,'mul','mul','Mulyani',NULL,2,2),(5,'endang','endang','Endang',NULL,3,2),(6,'nina','nina','Nina','Rustiani',4,2),(7,'norman','norman','Norman',NULL,5,1),(8,'ganjar','ganjar','Ganjar',NULL,6,1);
 
 UNLOCK TABLES;
 
