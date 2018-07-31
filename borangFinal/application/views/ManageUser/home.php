@@ -22,12 +22,10 @@
           <th>Nama User</th>
           <th>Username</th>
           <th>Role</th>
-          <th>Jenis Kelamin</th>
-          <th>Posisi</th>
           <th style="text-align: center;">Aksi</th>
         </tr>
       </thead>
-      <tbody id="data-pegawai">
+      <tbody id="data-manageUser">
         
       </tbody>
     </table>

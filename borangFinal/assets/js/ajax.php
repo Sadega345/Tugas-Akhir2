@@ -12,6 +12,8 @@
 		tampilPegawai();
 		tampilPosisi();
 		tampilKota();
+		tampilUser();
+		tampilManageUser();
 		<?php
 			if ($this->session->flashdata('msg') != '') {
 				echo "effect_msg();";
@@ -259,6 +261,226 @@
 	})
 
 	$('#update-kota').on('hidden.bs.modal', function () {
+	  $('.form-msg').html('');
+	})
+
+	// Kelola User
+	function tampilUser() {
+		$.get('<?php echo base_url('KelolaUser/tampil'); ?>', function(data) {
+			MyTable.fnDestroy();
+			$('#data-user').html(data);
+			refresh();
+		});
+	}
+
+	var id_user;
+	$(document).on("click", ".konfirmasiHapus-dataUser", function() {
+		id_user = $(this).attr("data-id");
+
+	})
+	$(document).on("click", ".hapus-dataUser", function() {
+		var id = id_user;
+		
+		$.ajax({
+			method: "POST",
+			url: "<?php echo base_url('KelolaUser/delete'); ?>",
+			data: "id=" +id
+		})
+		.done(function(data) {
+			$('#konfirmasiHapus').modal('hide');
+			tampilUser();
+			$('.msg').html(data);
+			effect_msg();
+		})
+	})
+
+	$(document).on("click", ".update-dataUser", function() {
+		var id = $(this).attr("data-id");
+		
+		$.ajax({
+			method: "POST",
+			url: "<?php echo base_url('KelolaUser/update'); ?>",
+			data: "id=" +id
+		})
+		.done(function(data) {
+			$('#update-modal').html(data);
+			$('#update-dataUser').modal('show');
+		})
+	})
+
+	$('#form-tambah-user').submit(function(e) {
+		var data = $(this).serialize();
+		
+		$.ajax({
+			method: 'POST',
+			url: '<?php echo base_url('KelolaUser/prosesTambah'); ?>',
+			data: data
+		})
+		.done(function(data) {
+			
+			var out = jQuery.parseJSON(data);
+			tampilUser();
+			if (out.status == 'form') {
+				$('.form-msg').html(out.msg);
+				effect_msg_form();
+			} else {
+				document.getElementById("form-tambah-user").reset();
+				$('#tambah-user').modal('hide');
+				$('.msg').html(out.msg);
+				effect_msg();
+			}
+		})
+		
+		e.preventDefault();
+	});
+
+
+	$(document).on('submit', '#form-update-user', function(e){
+		var data = $(this).serialize();
+
+		$.ajax({
+			method: 'POST',
+			url: '<?php echo base_url('KelolaUser/prosesUpdate'); ?>',
+			data: "id=" +id
+		})
+		.done(function(data) {
+			$('#update-user').html(data);
+			$('#update-user').modal('show');
+		})
+		
+		e.preventDefault();
+	});
+
+	$('#tambah-user').on('hidden.bs.modal', function () {
+	  $('.form-msg').html('');
+	})
+
+	$('#update-dataUser').on('hidden.bs.modal', function () {
+	  $('.form-msg').html('');
+	})
+
+	// Manage User
+	function tampilManageUser() {
+		$.get('<?php echo base_url('ManageUser/tampil'); ?>', function(data) {
+			MyTable.fnDestroy();
+			$('#data-manageUser').html(data);
+			refresh();
+		});
+	}
+
+	var id_manageUser;
+	$(document).on("click", ".konfirmasiHapus-manageUser", function() {
+		id_manageUser = $(this).attr("data-id");
+	})
+	$(document).on("click", ".hapus-dataManageUser", function() {
+		var id = id_manageUser;
+		
+		$.ajax({
+			method: "POST",
+			url: "<?php echo base_url('ManageUser/delete'); ?>",
+			data: "id=" +id
+		})
+		.done(function(data) {
+			$('#konfirmasiHapus').modal('hide');
+			tampilManageUser();
+			$('.msg').html(data);
+			effect_msg();
+		})
+	})
+
+	$(document).on("click", ".update-datamanageuser", function() {
+		var id = $(this).attr("data-id");
+		
+		$.ajax({
+			method: "POST",
+			url: "<?php echo base_url('Manage/update'); ?>",
+			data: "id=" +id
+		})
+		.done(function(data) {
+			$('#tempat-modal').html(data);
+			$('#update-manageuser').modal('show');
+		})
+	})
+
+	$(document).on("click", ".detail-dataManageUser", function() {
+		var id = $(this).attr("data-id");
+		
+		$.ajax({
+			method: "POST",
+			url: "<?php echo base_url('ManageUser/detail'); ?>",
+			data: "id=" +id
+		})
+		.done(function(data) {
+			$('#tempat-modal').html(data);
+			$('#tabel-detail').dataTable({
+				  "paging": true,
+				  "lengthChange": false,
+				  "searching": true,
+				  "ordering": true,
+				  "info": true,
+				  "autoWidth": false
+				});
+			$('#detail-manageUser').modal('show');
+		})
+	})
+
+	$('#form-tambah-ManageUser').submit(function(e) {
+		var data = $(this).serialize();
+
+		$.ajax({
+			method: 'POST',
+			url: '<?php echo base_url('ManageUser/prosesTambah'); ?>',
+			data: data
+		})
+		.done(function(data) {
+			var out = jQuery.parseJSON(data);
+
+			tampilManageUser();
+			if (out.status == 'form') {
+				$('.form-msg').html(out.msg);
+				effect_msg_form();
+			} else {
+				document.getElementById("form-tambah-manageUser").reset();
+				$('#tambah-manageUser').modal('hide');
+				$('.msg').html(out.msg);
+				effect_msg();
+			}
+		})
+		
+		e.preventDefault();
+	});
+
+	$(document).on('submit', '#form-update-manageUser', function(e){
+		var data = $(this).serialize();
+
+		$.ajax({
+			method: 'POST',
+			url: '<?php echo base_url('ManageUser/prosesUpdate'); ?>',
+			data: data
+		})
+		.done(function(data) {
+			var out = jQuery.parseJSON(data);
+
+			tampilKota();
+			if (out.status == 'form') {
+				$('.form-msg').html(out.msg);
+				effect_msg_form();
+			} else {
+				document.getElementById("form-update-manageUser").reset();
+				$('#update-manageUser').modal('hide');
+				$('.msg').html(out.msg);
+				effect_msg();
+			}
+		})
+		
+		e.preventDefault();
+	});
+
+	$('#tambah-manageUser').on('hidden.bs.modal', function () {
+	  $('.form-msg').html('');
+	})
+
+	$('#update-manageUser').on('hidden.bs.modal', function () {
 	  $('.form-msg').html('');
 	})
 

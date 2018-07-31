@@ -4,18 +4,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class ManageUser extends AUTH_Controller {
 	public function __construct() {
 		parent::__construct();
-		$this->load->model('M_pegawai');
-		$this->load->model('M_posisi');
-		$this->load->model('M_kota');
+		$this->load->model('M_ManageUser');
 	}
 
 	public function index() {
 		$data['userdata'] = $this->userdata;
-		$data['dataPegawai'] = $this->M_pegawai->select_all();
-		$data['dataPosisi'] = $this->M_posisi->select_all();
-		$data['dataKota'] = $this->M_kota->select_all();
+		
 
-		$data['page'] = "manageuser";
+		$data['page'] = "manageUser";
 		$data['judul'] = "Manage Data User";
 		$data['deskripsi'] = "Manage Data User";
 
@@ -25,7 +21,7 @@ class ManageUser extends AUTH_Controller {
 	}
 
 	public function tampil() {
-		$data['dataPegawai'] = $this->M_pegawai->select_all();
+		$data['datamanageUser'] = $this->M_ManageUser->select_all();
 		$this->load->view('ManageUser/list_data', $data);
 	}
 
@@ -62,7 +58,7 @@ class ManageUser extends AUTH_Controller {
 		$data['dataKota'] = $this->M_kota->select_all();
 		$data['userdata'] = $this->userdata;
 
-		echo show_my_modal('modals/modal_update_user', 'update-user', $data);
+		echo show_my_modal('modals/modal_update_user', $data);
 	}
 
 	public function prosesUpdate() {

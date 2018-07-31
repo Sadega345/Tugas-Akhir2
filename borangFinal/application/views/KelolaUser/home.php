@@ -19,15 +19,13 @@
     <table id="list-data" class="table table-bordered table-striped">
       <thead>
         <tr>
-          <th>Nama User</th>
-          <th>Username</th>
-          <th>Role</th>
-          <th>Jenis Kelamin</th>
-          <th>Posisi</th>
+          <th>User Name</th>
+          <th>First Name</th>
+          <th>Last Name</th>
           <th style="text-align: center;">Aksi</th>
         </tr>
       </thead>
-      <tbody id="data-pegawai">
+      <tbody id="data-user">
         
       </tbody>
     </table>
@@ -36,11 +34,11 @@
 
 <?php echo $modal_tambah_user; ?>
 
-<div id="tempat-modal"></div>
+<div id="user-modal"></div>
 
 <?php show_my_confirm('konfirmasiHapus', 'hapus-dataUser', 'Hapus Data Ini?', 'Ya, Hapus Data Ini'); ?>
 <?php
   $data['judul'] = 'User';
-  $data['url'] = 'Pegawai/import';
-  echo show_my_modal('modals/modal_import', 'import-pegawai', $data);
+  $data['url'] = 'KelolaUser/import';
+  echo show_my_modal('modals/modal_import', 'import-dataUser', $data);
 ?>
