@@ -59,7 +59,7 @@ class KelolaUser extends AUTH_Controller {
 
 		$data['dataUser'] = $this->M_User->select_by_id($id);
 		
-		$data['dataRole'] = $this->M_User->select_all();
+		$data['dataRole'] = $this->M_User->select_role();
 
 		$data['userdata'] = $this->userdata;
 

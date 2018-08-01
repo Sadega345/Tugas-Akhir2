@@ -3,10 +3,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_ManageUser extends CI_Model {
 	public function select_all() {
-		$this->db->select('*');
-		$this->db->from('user');
+		//$this->db->select('*');
+		//$this->db->from('user');
 
-		$data = $this->db->get();
+		//$data = $this->db->get();0
+
+		$sql = "SELECT u.*, r.role_name FROM USER u, role r WHERE u.role_id=r.role_id";
+
+		$data = $this->db->query($sql);
 
 		return $data->result();
 	}
@@ -20,8 +24,8 @@ class M_ManageUser extends CI_Model {
 		return $data->result();
 	}
 
-	public function select_role_byid($id){
-		$sql = "SELECT u.role_id,r.role_name FROM USER u INNER JOIN role r WHERE r.role_id='{$id}'";
+	public function select_role_byid(){
+		$sql = "SELECT DISTINCT u.role_id,r.role_name FROM USER u INNER JOIN role r WHERE u.role_id=r.role_id";
 
 		$data = $this->db->query($sql);
 
@@ -45,7 +49,26 @@ class M_ManageUser extends CI_Model {
 	}
 
 	public function insert($data) {
-		$sql = "INSERT INTO user VALUES('{$user_id}','" .$data['username'] ."','" .$data['pwd'] ."'," .$data['firstname'] ."','" .$data['lastname'] ."'," .$data['role_id'] .")";
+		$sql = "INSERT INTO permission  VALUES(0,
+												" .$data['role'] .",
+												'" .$data['datauser'] ."',
+												'" .$data['instrumen'] ."',
+												'" .$data['borang'] ."',
+												'" .$data['standar'] ."',
+
+												'" .$data['mhslulusan'] ."',
+												'" .$data['fakultas'] ."',
+												'" .$data['prodi'] ."',
+
+												'" .$data['keuangan'] ."',
+												'" .$data['logistik'] ."',
+												'" .$data['dosen'] ."',
+												'" .$data['jurnalilmiah'] ."')";
+
+		// $sql = "INSERT INTO permission VALUES(
+		// 										0,1,'dataUser','Instrumen','Borang','Standar','MhsLulusan',
+		// 										'Fakultas','Prodi','Keuangan','Logistik','Dosen','JurnalIlmiah'
+		// 									)";
 
 		$this->db->query($sql);
 

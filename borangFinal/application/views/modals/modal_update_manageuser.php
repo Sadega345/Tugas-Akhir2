@@ -35,20 +35,20 @@
           <input type="text" class="form-control" placeholder="password" name="pwd" aria-describedby="sizing-addon2" value="<?php echo $dataUser->pwd; ?>">
         </div>
 
-          <div class="input-group form-group">
+         <!-- <div class="input-group form-group">
           <span class="input-group-addon" id="sizing-addon2">
             <i class="glyphicon glyphicon-home"></i>
           </span>
           <select name="role" class="form-control select2"  aria-describedby="sizing-addon2">
             <?php
-            foreach ($dataRole as $data) {
+            foreach ($dataUser as $user) {
               ?>
-              <option value="<?php echo $data->role_id; ?>" <?php if($data->role_id == $dataUser->role_id){echo "selected='selected'";} ?>><?php echo $data->role_name; ?></option>
+              <option value="<?php echo $user->role_id; ?>" <?php if($user->role_id == $dataUser->role_id){echo "selected='selected'";} ?>><?php echo $user->role_id; ?></option>
               <?php
             }
             ?>
           </select>
-        </div>
+        </div> -->
         
         <div class="form-group">
           <div class="col-md-12">

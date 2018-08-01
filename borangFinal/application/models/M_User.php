@@ -45,7 +45,21 @@ class M_User extends CI_Model {
 	}
 
 	public function insert($data) {
-		$sql = "INSERT INTO user VALUES('{$user_id}','" .$data['username'] ."','" .$data['pwd'] ."'," .$data['firstname'] ."','" .$data['lastname'] ."'," .$data['role_id'] .")";
+		$sql = "INSERT INTO user VALUES(0,'" .$data['username'] ."','" .$data['pwd'] ."','" .$data['firstname'] ."','" .$data['lastname'] ."'," .$data['role'] .",1)";
+
+		$this->db->query($sql);
+
+		return $this->db->affected_rows();
+	}
+
+	public function update($data) {
+		$sql = "UPDATE user SET 
+						username='" .$data['username'] ."',
+						pwd='" .$data['pwd'] ."',
+						firstname='" .$data['firstname'] ."',
+						lastname='" .$data['lastname'] ."'
+
+						WHERE user_id='" .$data['id'] ."'";
 
 		$this->db->query($sql);
 

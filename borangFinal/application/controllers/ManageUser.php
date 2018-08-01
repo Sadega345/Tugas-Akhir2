@@ -9,38 +9,35 @@ class ManageUser extends AUTH_Controller {
 
 	public function index() {
 		$data['userdata'] = $this->userdata;
-		
 
 		$data['page'] = "manageUser";
 		$data['judul'] = "Manage Data User";
 		$data['deskripsi'] = "Manage Data User";
-
-		$data['modal_tambah_user'] = show_my_modal('modals/modal_tambah_user', 'tambah-user', $data);
+		$data['dataRole'] = $this->M_ManageUser->select_role();
+		$data['modal_tambah_manageUser'] = show_my_modal('modals/modal_tambah_manageUser', 'tambah-manageUser', $data);
 
 		$this->template->views('ManageUser/home', $data);
 	}
 
 	public function tampil() {
 		$data['datamanageUser'] = $this->M_ManageUser->select_all();
+		$data['dataRole'] = $this->M_ManageUser->select_role_byid();
 		$this->load->view('ManageUser/list_data', $data);
 	}
 
 	public function prosesTambah() {
-		$this->form_validation->set_rules('nama', 'Nama', 'trim|required');
-		$this->form_validation->set_rules('kota', 'Kota', 'trim|required');
-		$this->form_validation->set_rules('jk', 'Jenis Kelamin', 'trim|required');
-		$this->form_validation->set_rules('posisi', 'Posisi', 'trim|required');
+		$this->form_validation->set_rules('role', 'Role', 'trim|required');
 
 		$data = $this->input->post();
 		if ($this->form_validation->run() == TRUE) {
-			$result = $this->M_pegawai->insert($data);
+			$result = $this->M_ManageUser->insert($data);
 
 			if ($result > 0) {
 				$out['status'] = '';
-				$out['msg'] = show_succ_msg('Data Pegawai Berhasil ditambahkan', '20px');
+				$out['msg'] = show_succ_msg('Data Manage Berhasil ditambahkan', '20px');
 			} else {
 				$out['status'] = '';
-				$out['msg'] = show_err_msg('Data Pegawai Gagal ditambahkan', '20px');
+				$out['msg'] = show_err_msg('Data Manage Gagal ditambahkan', '20px');
 			}
 		} else {
 			$out['status'] = 'form';
@@ -53,9 +50,9 @@ class ManageUser extends AUTH_Controller {
 	public function update() {
 		$id = trim($_POST['id']);
 
-		$data['dataPegawai'] = $this->M_pegawai->select_by_id($id);
-		$data['dataPosisi'] = $this->M_posisi->select_all();
-		$data['dataKota'] = $this->M_kota->select_all();
+		$data['dataPegawai'] = $this->M_ManageUser->select_by_id($id);
+		$data['dataPosisi'] = $this->M_ManageUser->select_all();
+		$data['dataKota'] = $this->M_ManageUser->select_all();
 		$data['userdata'] = $this->userdata;
 
 		echo show_my_modal('modals/modal_update_user', $data);

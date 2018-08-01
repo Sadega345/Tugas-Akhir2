@@ -22,10 +22,28 @@
 
       <li <?php if ($page == 'manageUser') {echo 'class="active"';} ?>>
         <a href="<?php echo base_url('ManageUser'); ?>">
-          <i class="fa fa-briefcase"></i>
+          <i class="fa fa-user"></i>
           <span>Manage Data User</span>
         </a>
       </li>
+      <?php if ($this->session->userdata('fakultas') == 'v'): ?>
+        <li <?php if ($page == 'manageUser') {echo 'class="active"';} ?>>
+        <a href="<?php echo base_url('ManageUser'); ?>">
+          <i class="fa fa-user"></i>
+          <span><?php echo $this->session->userdata('fakultas'); ?></span>
+        </a>
+      </li>
+      <?php endif ?>
+
+      <?php if ($this->session->userdata('instrumen') == ''): ?>
+        <li <?php if ($page == 'manageUser') {echo 'class="active"';} ?>>
+        <a href="<?php echo base_url('ManageUser'); ?>">
+          <i class="fa fa-user"></i>
+          <span><?php echo $this->session->userdata('instrumen'); ?></span>
+        </a>
+      </li>
+      <?php endif ?>
+      
       
     </ul>
     <!-- /.sidebar-menu -->

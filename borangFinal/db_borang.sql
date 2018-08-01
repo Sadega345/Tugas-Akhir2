@@ -1,5 +1,5 @@
 /*
-SQLyog Enterprise - MySQL GUI v7.02 
+SQLyog Enterprise - MySQL GUI v8.05 
 MySQL - 5.6.16 : Database - db_borang
 *********************************************************************
 */
@@ -211,13 +211,28 @@ DROP TABLE IF EXISTS `permission`;
 
 CREATE TABLE `permission` (
   `permission_id` int(4) NOT NULL AUTO_INCREMENT,
-  `permission_desc` text,
-  PRIMARY KEY (`permission_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+  `role_id` int(3) DEFAULT NULL,
+  `data_user` varchar(10) DEFAULT NULL,
+  `instrumen` varchar(10) DEFAULT NULL,
+  `borang` varchar(10) DEFAULT NULL,
+  `standar` varchar(10) DEFAULT NULL,
+  `mhslulusan` varchar(10) DEFAULT NULL,
+  `fakultas` varchar(10) DEFAULT NULL,
+  `prodi` varchar(10) DEFAULT NULL,
+  `keuangan` varchar(10) DEFAULT NULL,
+  `logistik` varchar(10) DEFAULT NULL,
+  `dosen` varchar(10) DEFAULT NULL,
+  `jurnalilmiah` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`permission_id`),
+  KEY `FK_permission` (`role_id`),
+  CONSTRAINT `FK_permission` FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 /*Data for the table `permission` */
 
 LOCK TABLES `permission` WRITE;
+
+insert  into `permission`(`permission_id`,`role_id`,`data_user`,`instrumen`,`borang`,`standar`,`mhslulusan`,`fakultas`,`prodi`,`keuangan`,`logistik`,`dosen`,`jurnalilmiah`) values (1,1,'dataUser','Instrumen','Borang','Standar','MhsLulusan','Fakultas','Prodi','Keuangan','Logistik','Dosen','JurnalIlmi'),(2,1,'dataUser','Instrumen','Borang','Standar','MhsLulusan','Fakultas','Prodi','Keuangan','Logistik','Dosen','JurnalIlmi'),(3,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(4,1,'v',NULL,'v','v','v','v','v','v','v','v','v');
 
 UNLOCK TABLES;
 
@@ -352,15 +367,15 @@ CREATE TABLE `user` (
   PRIMARY KEY (`user_id`),
   KEY `FK_user` (`role_id`),
   KEY `FK_user_gender` (`gender_id`),
-  CONSTRAINT `FK_user_gender` FOREIGN KEY (`gender_id`) REFERENCES `mst_gender` (`gender_id`),
-  CONSTRAINT `FK_user` FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+  CONSTRAINT `FK_user` FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`),
+  CONSTRAINT `FK_user_gender` FOREIGN KEY (`gender_id`) REFERENCES `mst_gender` (`gender_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 /*Data for the table `user` */
 
 LOCK TABLES `user` WRITE;
 
-insert  into `user`(`user_id`,`username`,`pwd`,`firstname`,`lastname`,`role_id`,`gender_id`) values (1,'admin','admin','Teguh','Prabowo',7,1),(2,'d3mi','d3mi','Erna','Hikmawati',1,2),(3,'s1ti','s1ti','Soleh','Sabarudin',1,1),(4,'mul','mul','Mulyani',NULL,2,2),(5,'endang','endang','Endang',NULL,3,2),(6,'nina','nina','Nina','Rustiani',4,2),(7,'norman','norman','Norman',NULL,5,1),(8,'ganjar','ganjar','Ganjar',NULL,6,1);
+insert  into `user`(`user_id`,`username`,`pwd`,`firstname`,`lastname`,`role_id`,`gender_id`) values (1,'admin','admin','Teguh','Prabowo',7,1),(2,'d3mi','d3mi','Erna','Hikmawati',1,2),(3,'s1ti','s1ti','Soleh','Sabarudin',1,1),(4,'mul','mul','Mulyani',NULL,2,2),(5,'endang','endang','Endang',NULL,3,2),(6,'nina','nina','Nina','Rustiani',4,2),(7,'norman','norman','Norman',NULL,5,1),(8,'teguh','password','firstname',';astma,e',1,1),(9,'teguh','teguh','teguh','prabowo',1,1),(10,'wwe','30okto1992qsas','qsdd','dedenqass',7,1);
 
 UNLOCK TABLES;
 

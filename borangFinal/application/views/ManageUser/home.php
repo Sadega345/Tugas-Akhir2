@@ -5,7 +5,7 @@
 <div class="box">
   <div class="box-header">
     <div class="col-md-6" style="padding: 0;">
-        <button class="form-control btn btn-primary" data-toggle="modal" data-target="#tambah-user"><i class="glyphicon glyphicon-plus-sign"></i> Tambah Data</button>
+        <button class="form-control btn btn-primary" data-toggle="modal" data-target="#tambah-manageUser"><i class="glyphicon glyphicon-plus-sign"></i> Tambah Data</button>
     </div>
     <div class="col-md-3">
         <a href="<?php echo base_url('Pegawai/export'); ?>" class="form-control btn btn-default"><i class="glyphicon glyphicon glyphicon-floppy-save"></i> Export Data Excel</a>
@@ -32,9 +32,9 @@
   </div>
 </div>
 
-<?php echo $modal_tambah_user; ?>
+<?php echo $modal_tambah_manageUser; ?>
 
-<div id="tempat-modal"></div>
+<div id="tambah-manageUser"></div>
 
 <?php show_my_confirm('konfirmasiHapus', 'hapus-dataUser', 'Hapus Data Ini?', 'Ya, Hapus Data Ini'); ?>
 <?php

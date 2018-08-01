@@ -36,7 +36,30 @@ class Auth extends CI_Controller {
 					'status' => "Loged in"
 				];
 				$this->session->set_userdata($session);
+				$sql = "SELECT data_user,instrumen,borang,standar,mhslulusan,fakultas,prodi,
+				keuangan,logistik,dosen,jurnalilmiah FROM permission";
+
+				$data = $this->db->query($sql);
+
+				$result = $data->row();
+				$session_data = array(
+					'data_user' => $result->data_user,
+					'instrumen' => $result->instrumen,
+					'borang' => $result->borang,
+					'standar' => $result->standar,
+					'mhslulusan' => $result->mhslulusan,
+					'fakultas' => $result->fakultas,
+
+					'prodi' => $result->prodi,
+					'keuangan' => $result->keuangan,
+					'logistik' => $result->logistik,
+					'dosen' => $result->dosen,
+					'jurnalilmiah' => $result->jurnalilmiah
+				);
+				$this->session->set_userdata($session_data);
+				
 				redirect('Home');
+
 			}
 		} else {
 			$this->session->set_flashdata('error_msg', validation_errors());
