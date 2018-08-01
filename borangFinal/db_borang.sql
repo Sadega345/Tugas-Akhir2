@@ -232,7 +232,7 @@ CREATE TABLE `permission` (
 
 LOCK TABLES `permission` WRITE;
 
-insert  into `permission`(`permission_id`,`role_id`,`data_user`,`instrumen`,`borang`,`standar`,`mhslulusan`,`fakultas`,`prodi`,`keuangan`,`logistik`,`dosen`,`jurnalilmiah`) values (1,1,'dataUser','Instrumen','Borang','Standar','MhsLulusan','Fakultas','Prodi','Keuangan','Logistik','Dosen','JurnalIlmi'),(2,1,'dataUser','Instrumen','Borang','Standar','MhsLulusan','Fakultas','Prodi','Keuangan','Logistik','Dosen','JurnalIlmi'),(3,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(4,1,'v',NULL,'v','v','v','v','v','v','v','v','v');
+insert  into `permission`(`permission_id`,`role_id`,`data_user`,`instrumen`,`borang`,`standar`,`mhslulusan`,`fakultas`,`prodi`,`keuangan`,`logistik`,`dosen`,`jurnalilmiah`) values (1,1,'dataUser',NULL,'Borang','Standar','MhsLulusan','Fakultas','Prodi','Keuangan','Logistik','Dosen','JurnalIlmi'),(2,1,'dataUser','Instrumen','Borang','Standar','MhsLulusan','Fakultas','Prodi','Keuangan','Logistik','Dosen','JurnalIlmi'),(3,3,NULL,'instrumen',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(4,2,'v','','v','v','v','','v','v','v','v','v');
 
 UNLOCK TABLES;
 
@@ -375,7 +375,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 
-insert  into `user`(`user_id`,`username`,`pwd`,`firstname`,`lastname`,`role_id`,`gender_id`) values (1,'admin','admin','Teguh','Prabowo',7,1),(2,'d3mi','d3mi','Erna','Hikmawati',1,2),(3,'s1ti','s1ti','Soleh','Sabarudin',1,1),(4,'mul','mul','Mulyani',NULL,2,2),(5,'endang','endang','Endang',NULL,3,2),(6,'nina','nina','Nina','Rustiani',4,2),(7,'norman','norman','Norman',NULL,5,1),(8,'teguh','password','firstname',';astma,e',1,1),(9,'teguh','teguh','teguh','prabowo',1,1),(10,'wwe','30okto1992qsas','qsdd','dedenqass',7,1);
+insert  into `user`(`user_id`,`username`,`pwd`,`firstname`,`lastname`,`role_id`,`gender_id`) values (1,'admin','admin','Teguh','Prabowo',7,1),(2,'d3mi','d3mi','Erna','Hikmawati',1,2),(3,'s1ti','s1ti','Soleh','Sabarudin',1,1),(4,'mulyani','mulyani','Mulyani',NULL,2,2),(5,'endang','endang','Endang',NULL,3,2),(6,'nina','nina','Nina','Rustiani',4,2),(7,'norman','norman','Norman',NULL,5,1),(8,'teguh','prabowo','firstname','prabowo',2,1),(9,'teguh','sadega','teguh','prabowo',1,1),(10,'wwe','30okto1992qsas','qsdd','dedenqass',7,1);
 
 UNLOCK TABLES;
 

@@ -26,21 +26,34 @@
           <span>Manage Data User</span>
         </a>
       </li>
-      <?php if ($this->session->userdata('fakultas') == 'v'): ?>
-        <li <?php if ($page == 'manageUser') {echo 'class="active"';} ?>>
-        <a href="<?php echo base_url('ManageUser'); ?>">
+      <?php if($this->session->userdata('fakultas') != ""){?>
+        <li <?php if ($page == 'Fakultas') {echo 'class="active"';} ?>>
+        <a href="<?php echo base_url('Fakultas'); ?>">
           <i class="fa fa-user"></i>
-          <span><?php echo $this->session->userdata('fakultas'); ?></span>
+          <span>
+            <?php 
+            // if (!is_null($this->session->userdata('fakultas'))):
+            echo $this->session->userdata('fakultas'); 
+            
+            ?>
+              
+            </span>
         </a>
       </li>
-      <?php endif ?>
-
+     <?php } ?>
+     <?php if($this->session->userdata('instrumen') != "") { ?>
     <li <?php if ($page == 'instrumen') {echo 'class="active"';} ?>>
         <a href="<?php echo base_url('Instrumen'); ?>">
           <i class="fa fa-file"></i>
-          <span>Instrumen</span>
+          <span>
+            <?php 
+            // if (!is_null($this->session->userdata('fakultas'))):
+            echo $this->session->userdata('instrumen'); 
+            
+            ?></span>
         </a>
       </li>
+      <?php } ?>
        <li <?php if ($page == 'dataBorang') {echo 'class="active"';} ?>>
         <a href="<?php echo base_url('dataBorang'); ?>">
           <i class="fa fa-briefcase"></i>

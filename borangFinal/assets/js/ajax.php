@@ -303,8 +303,9 @@
 			data: "id=" +id
 		})
 		.done(function(data) {
-			$('#update-modal').html(data);
-			$('#update-dataUser').modal('show');
+			
+			$('#user-modal').html(data);
+			$('#update-user').modal('show');
 		})
 	})
 
@@ -341,11 +342,21 @@
 		$.ajax({
 			method: 'POST',
 			url: '<?php echo base_url('KelolaUser/prosesUpdate'); ?>',
-			data: "id=" +id
+			data: data
 		})
 		.done(function(data) {
-			$('#update-user').html(data);
-			$('#update-user').modal('show');
+			var out = jQuery.parseJSON(data);
+
+			tampilUser();
+			if (out.status == 'form') {
+				$('.form-msg').html(out.msg);
+				effect_msg_form();
+			} else {
+				document.getElementById("form-update-user").reset();
+				$('#update-user').modal('hide');
+				$('.msg').html(out.msg);
+				effect_msg();
+			}
 		})
 		
 		e.preventDefault();
@@ -424,7 +435,7 @@
 		})
 	})
 
-	$('#form-tambah-ManageUser').submit(function(e) {
+	$('#form-tambah-manageUser').submit(function(e) {
 		var data = $(this).serialize();
 
 		$.ajax({
@@ -434,7 +445,7 @@
 		})
 		.done(function(data) {
 			var out = jQuery.parseJSON(data);
-
+		
 			tampilManageUser();
 			if (out.status == 'form') {
 				$('.form-msg').html(out.msg);
