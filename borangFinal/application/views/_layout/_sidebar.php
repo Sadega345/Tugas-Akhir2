@@ -35,14 +35,24 @@
       </li>
       <?php endif ?>
 
-      <?php if ($this->session->userdata('instrumen') == ''): ?>
-        <li <?php if ($page == 'manageUser') {echo 'class="active"';} ?>>
-        <a href="<?php echo base_url('ManageUser'); ?>">
-          <i class="fa fa-user"></i>
-          <span><?php echo $this->session->userdata('instrumen'); ?></span>
+    <li <?php if ($page == 'instrumen') {echo 'class="active"';} ?>>
+        <a href="<?php echo base_url('Instrumen'); ?>">
+          <i class="fa fa-file"></i>
+          <span>Instrumen</span>
         </a>
       </li>
-      <?php endif ?>
+       <li <?php if ($page == 'dataBorang') {echo 'class="active"';} ?>>
+        <a href="<?php echo base_url('dataBorang'); ?>">
+          <i class="fa fa-briefcase"></i>
+          <span>Data Borang</span>
+        </a>
+      </li>
+       <li <?php if ($page == 'profile') {echo 'class="active"';} ?>>
+        <a href="<?php echo base_url('Profile'); ?>">
+          <i class="fa fa-cog"></i>
+          <span>Setting Admin</span>
+        </a>
+      </li>
       
       
     </ul>

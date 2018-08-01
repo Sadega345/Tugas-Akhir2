@@ -1,7 +1,7 @@
 <div class="row">
-  <div class="col-md-3">
+  <!-- <div class="col-md-3"> -->
     <!-- Profile Image -->
-    <div class="box box-primary">
+   <!--  <div class="box box-primary">
       <div class="box-body box-profile">
         <img class="profile-user-img img-responsive img-circle" src="<?php echo base_url(); ?>assets/img/<?php echo $userdata->foto; ?>" alt="User profile picture">
 
@@ -16,12 +16,12 @@
         </ul>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <div class="col-md-9">
     <div class="nav-tabs-custom">
       <ul class="nav nav-tabs">
-        <li class="active"><a href="#settings" data-toggle="tab">Settings</a></li>
+        <li class="active"><a href="#settings" data-toggle="tab">Setting</a></li>
         <li><a href="#password" data-toggle="tab">Ubah Password</a></li>
       </ul>
       <div class="tab-content">
@@ -30,21 +30,27 @@
             <div class="form-group">
               <label for="inputUsername" class="col-sm-2 control-label">Username</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" id= placeholder="Username" name="username" value="<?php echo $userdata->username; ?>">
+                <input type="text" class="form-control" placeholder="Username" name="username" value="<?php echo $userdata->username; ?>">
               </div>
             </div>
             <div class="form-group">
-              <label for="inputNama" class="col-sm-2 control-label">Name</label>
+              <label for="inputFirstName" class="col-sm-2 control-label">First Name</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" placeholder="Name" name="nama" value="<?php echo $userdata->nama; ?>">
+                <input type="text" class="form-control" placeholder="First Name" name="firstname" value="<?php echo $userdata->firstname; ?>">
               </div>
             </div>
             <div class="form-group">
+              <label for="inpuLasttName" class="col-sm-2 control-label">Last Name</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" placeholder="Last Name" name="lastname" value="<?php echo $userdata->lastname; ?>">
+              </div>
+            </div>
+           <!--  <div class="form-group">
               <label for="inputFoto" class="col-sm-2 control-label">Foto</label>
               <div class="col-sm-10">
                 <input type="file" class="form-control" placeholder="Foto" name="foto">
               </div>
-            </div>
+            </div> -->
             
             <div class="form-group">
               <div class="col-sm-offset-2 col-sm-10">
