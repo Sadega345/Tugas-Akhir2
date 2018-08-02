@@ -72,7 +72,7 @@ class Profile extends AUTH_Controller {
 					if ($result > 0) {
 						$this->updateProfil();
 						$this->session->set_flashdata('msg', show_succ_msg('Password Berhasil diubah'));
-						redirect('Profile');
+						redirect('Login');
 					} else {
 						$this->session->set_flashdata('msg', show_err_msg('Password Gagal diubah'));
 						redirect('Profile');

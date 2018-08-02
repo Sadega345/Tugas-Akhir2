@@ -14,6 +14,7 @@
 		tampilKota();
 		tampilUser();
 		tampilManageUser();
+		tampilInstrumen();
 		<?php
 			if ($this->session->flashdata('msg') != '') {
 				echo "effect_msg();";
@@ -617,6 +618,98 @@
 	})
 
 	$('#update-posisi').on('hidden.bs.modal', function () {
+	  $('.form-msg').html('');
+	})
+
+
+	//Instrumen
+	function tampilInstrumen() {
+		$.get('<?php echo base_url('Instrumen/tampil'); ?>', function(data) {
+			MyTable.fnDestroy();
+			$('#data-instrumen').html(data);
+			refresh();
+		});
+	}
+
+	var instrumen_id;
+	$(document).on("click", ".konfirmasiHapus-instrumen", function() {
+		instrumen_id = $(this).attr("data-id");
+	})
+	$(document).on("click", ".hapus-instrumen", function() {
+		var id = instrumen_id;
+		
+		$.ajax({
+			method: "POST",
+			url: "<?php echo base_url('Instrumen/delete'); ?>",
+			data: "id=" +id
+		})
+		.done(function(data) {
+			$('#konfirmasiHapus').modal('hide');
+			tampilInstrumen();
+			$('.msg').html(data);
+			effect_msg();
+		})
+	})
+
+
+	$('#form-tambah-instrumen').submit(function(e) {
+		var data = $(this).serialize();
+
+		$.ajax({
+			method: 'POST',
+			url: '<?php echo base_url('Instrumen/do_upload'); ?>',
+			// data: data
+			data:new FormData(this), //penggunaan FormData
+                     processData:false,
+                     contentType:false,
+                     cache:false,
+                     async:false,
+		})
+		.done(function(data) {
+			var out = jQuery.parseJSON(data);
+
+			tampilInstrumen();
+			if (out.status == 'form') {
+				$('.form-msg').html(out.msg);
+				effect_msg_form();
+			} else {
+				document.getElementById("form-tambah-instrumen").reset();
+				$('#tambah-instrumen').modal('hide');
+				$('.msg').html(out.msg);
+				effect_msg();
+			}
+		})
+		
+		e.preventDefault();
+	});
+
+	// $(document).on('submit', '#form-update-posisi', function(e){
+	// 	var data = $(this).serialize();
+
+	// 	$.ajax({
+	// 		method: 'POST',
+	// 		url: '<?php echo base_url('Posisi/prosesUpdate'); ?>',
+	// 		data: data
+	// 	})
+	// 	.done(function(data) {
+	// 		var out = jQuery.parseJSON(data);
+
+	// 		tampilPosisi();
+	// 		if (out.status == 'form') {
+	// 			$('.form-msg').html(out.msg);
+	// 			effect_msg_form();
+	// 		} else {
+	// 			document.getElementById("form-update-posisi").reset();
+	// 			$('#update-posisi').modal('hide');
+	// 			$('.msg').html(out.msg);
+	// 			effect_msg();
+	// 		}
+	// 	})
+		
+	// 	e.preventDefault();
+	// });
+
+	$('#tambah-instrumen').on('hidden.bs.modal', function () {
 	  $('.form-msg').html('');
 	})
 </script>

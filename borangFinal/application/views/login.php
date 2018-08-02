@@ -73,6 +73,15 @@
 
       </div>
       <!-- /.login-box-body -->
+      <!--Succes message-->
+     <!--   <?php if($this->session->flashdata('success')){ ?>
+        <div class="alert alert-success">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <strong>Password berhasil di ganti</strong> <?php echo $this->session->flashdata('success'); ?>
+        </div>
+      <?php } ?> -->
+     <!--  <?php echo show_succ_msg($this->session->flashdata('Password Berhasil diubah')); ?> -->
+      <!-- --  -->
       <?php
         echo show_err_msg($this->session->flashdata('error_msg'));
       ?>
