@@ -32,6 +32,15 @@ class M_ManageUser extends CI_Model {
 		return $data->result();
 	}
 
+	public function select_permission_byid($id){
+		$sql = "SELECT DISTINCT data_user,instrumen,borang,standar,mhslulusan,fakultas,prodi,keuangan,logistik,dosen,jurnalilmiah FROM permission WHERE permission_id='".$id."'";
+
+
+		$data = $this->db->query($sql);
+
+		return $data->result();
+	}
+
 	public function select_by_id($id) {
 		$sql = "SELECT * FROM user WHERE user_id = '" .$id ."'";
 
@@ -69,6 +78,20 @@ class M_ManageUser extends CI_Model {
 		// 										0,1,'dataUser','Instrumen','Borang','Standar','MhsLulusan',
 		// 										'Fakultas','Prodi','Keuangan','Logistik','Dosen','JurnalIlmiah'
 		// 									)";
+
+		$this->db->query($sql);
+
+		return $this->db->affected_rows();
+	}
+
+	public function update($data) {
+		$sql = "UPDATE user SET 
+						username='" .$data['username'] ."',
+						pwd='" .$data['pwd'] ."',
+						firstname='" .$data['firstname'] ."',
+						lastname='" .$data['lastname'] ."'
+
+						WHERE user_id='" .$data['id'] ."'";
 
 		$this->db->query($sql);
 

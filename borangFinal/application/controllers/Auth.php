@@ -36,13 +36,14 @@ class Auth extends CI_Controller {
 					'status' => "Loged in"
 				];
 				$this->session->set_userdata($session);
-				$sql = "SELECT data_user,instrumen,borang,standar,mhslulusan,fakultas,prodi,
-				keuangan,logistik,dosen,jurnalilmiah FROM permission";
+				$sql = "SELECT p.role_id,p.data_user,p.instrumen,p.borang,p.standar,p.mhslulusan,p.fakultas,p.prodi,p.keuangan,p.logistik,p.dosen,p.jurnalilmiah FROM permission p INNER JOIN USER u WHERE p.role_id=u.role_id AND u.username="."'$username '"."AND u.pwd="."'$password'";
 
 				$data = $this->db->query($sql);
-
+				
 				$result = $data->row();
-				$session_data = array(
+
+				   var_dump($result->fakultas);
+			       $session_data = array(
 					'data_user' => $result->data_user,
 					'instrumen' => $result->instrumen,
 					'borang' => $result->borang,
@@ -58,6 +59,7 @@ class Auth extends CI_Controller {
 				);
 				$this->session->set_userdata($session_data);
 				
+				// echo  $this->session->userdata('fakultas');
 				redirect('Home');
 
 			}

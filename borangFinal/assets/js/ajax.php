@@ -15,6 +15,7 @@
 		tampilUser();
 		tampilManageUser();
 		tampilInstrumen();
+		tampilStandar();
 		<?php
 			if ($this->session->flashdata('msg') != '') {
 				echo "effect_msg();";
@@ -381,10 +382,12 @@
 	}
 
 	var id_manageUser;
-	$(document).on("click", ".konfirmasiHapus-manageUser", function() {
+	$(document).on("click", ".konfirmasiHapus-manageuser", function() {
+
 		id_manageUser = $(this).attr("data-id");
+		// alert(id_manageUser);
 	})
-	$(document).on("click", ".hapus-dataManageUser", function() {
+	$(document).on("click", ".hapus-datamanageUser", function() {
 		var id = id_manageUser;
 		
 		$.ajax({
@@ -394,6 +397,7 @@
 		})
 		.done(function(data) {
 			$('#konfirmasiHapus').modal('hide');
+
 			tampilManageUser();
 			$('.msg').html(data);
 			effect_msg();
@@ -405,12 +409,12 @@
 		
 		$.ajax({
 			method: "POST",
-			url: "<?php echo base_url('Manage/update'); ?>",
+			url: "<?php echo base_url('ManageUser/update'); ?>",
 			data: "id=" +id
 		})
 		.done(function(data) {
-			$('#tempat-modal').html(data);
-			$('#update-manageuser').modal('show');
+			$('#ubah-manageUser').html(data);
+			$('#ubah-manageuser').modal('show');
 		})
 	})
 
@@ -492,7 +496,7 @@
 	  $('.form-msg').html('');
 	})
 
-	$('#update-manageUser').on('hidden.bs.modal', function () {
+	$('#update-manageuser').on('hidden.bs.modal', function () {
 	  $('.form-msg').html('');
 	})
 
@@ -666,6 +670,7 @@
                      async:false,
 		})
 		.done(function(data) {
+			// alert('tes');
 			var out = jQuery.parseJSON(data);
 
 			tampilInstrumen();
@@ -683,33 +688,111 @@
 		e.preventDefault();
 	});
 
-	// $(document).on('submit', '#form-update-posisi', function(e){
-	// 	var data = $(this).serialize();
-
-	// 	$.ajax({
-	// 		method: 'POST',
-	// 		url: '<?php echo base_url('Posisi/prosesUpdate'); ?>',
-	// 		data: data
-	// 	})
-	// 	.done(function(data) {
-	// 		var out = jQuery.parseJSON(data);
-
-	// 		tampilPosisi();
-	// 		if (out.status == 'form') {
-	// 			$('.form-msg').html(out.msg);
-	// 			effect_msg_form();
-	// 		} else {
-	// 			document.getElementById("form-update-posisi").reset();
-	// 			$('#update-posisi').modal('hide');
-	// 			$('.msg').html(out.msg);
-	// 			effect_msg();
-	// 		}
-	// 	})
-		
-	// 	e.preventDefault();
-	// });
-
 	$('#tambah-instrumen').on('hidden.bs.modal', function () {
+	  $('.form-msg').html('');
+	})
+
+	//Manage Standar
+	function tampilStandar() {
+		$.get('<?php echo base_url('ManageStandar/tampil'); ?>', function(data) {
+			MyTable.fnDestroy();
+			$('#data-manageStandar').html(data);
+			refresh();
+		});
+	}
+
+	var id_standar;
+	$(document).on("click", ".konfirmasiHapus-manageStandar", function() {
+		id_standar = $(this).attr("data-id");
+	})
+	$(document).on("click", ".hapus-dataStandar", function() {
+		var id = id_standar;
+		
+		$.ajax({
+			method: "POST",
+			url: "<?php echo base_url('ManageStandar/delete'); ?>",
+			data: "id=" +id
+		})
+		.done(function(data) {
+			$('#konfirmasiHapus').modal('hide');
+			tampilStandar();
+			$('.msg').html(data);
+			effect_msg();
+		})
+	})
+
+	$(document).on("click", ".update-datamanageStandar", function() {
+		var id = $(this).attr("data-id");
+		
+		$.ajax({
+			method: "POST",
+			url: "<?php echo base_url('ManageStandar/update'); ?>",
+			data: "id=" +id
+		})
+		.done(function(data) {
+			// alert('tes');
+			$('#ubah-manageStandar').html(data);
+			$('#ubah-managestandar').modal('show');
+		})
+	})
+
+	$('#form-tambah-manageStandar').submit(function(e) {
+		var data = $(this).serialize();
+
+		$.ajax({
+			method: 'POST',
+			url: '<?php echo base_url('ManageStandar/prosesTambah'); ?>',
+			data: data
+		})
+		.done(function(data) {
+			var out = jQuery.parseJSON(data);
+			// alert('masuk');
+			tampilStandar();
+			if (out.status == 'form') {
+				$('.form-msg').html(out.msg);
+				effect_msg_form();
+			} else {
+				document.getElementById("form-tambah-manageStandar").reset();
+				$('#tambah-manageStandar').modal('hide');
+				$('.msg').html(out.msg);
+				effect_msg();
+			}
+		})
+		
+		e.preventDefault();
+	});
+
+	$(document).on('submit', '#form-update-manageStandar', function(e){
+		var data = $(this).serialize();
+
+		$.ajax({
+			method: 'POST',
+			url: '<?php echo base_url('ManageStandar/prosesUpdate'); ?>',
+			data: data
+		})
+		.done(function(data) {
+			var out = jQuery.parseJSON(data);
+
+			tampilStandar();
+			if (out.status == 'form') {
+				$('.form-msg').html(out.msg);
+				effect_msg_form();
+			} else {
+				document.getElementById("form-update-manageStandar").reset();
+				$('#ubah-managestandar').modal('hide');
+				$('.msg').html(out.msg);
+				effect_msg();
+			}
+		})
+		
+		e.preventDefault();
+	});
+
+	$('#tambah-manageStandar').on('hidden.bs.modal', function () {
+	  $('.form-msg').html('');
+	})
+
+	$('#update-manageStandar').on('hidden.bs.modal', function () {
 	  $('.form-msg').html('');
 	})
 </script>

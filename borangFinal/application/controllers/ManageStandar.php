@@ -1,45 +1,49 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class KelolaUser extends AUTH_Controller {
+class ManageStandar extends AUTH_Controller {
 	public function __construct() {
 		parent::__construct();
-		$this->load->model('M_User');
+		$this->load->model('M_ManageStandar');
 	}
 
 	public function index() {
 		$data['userdata'] = $this->userdata;
 
-		$data['page'] = "dataUser";
-		$data['judul'] = "Data User";
-		$data['deskripsi'] = "Manage Data User";
-		$data['dataRole'] = $this->M_User->select_role();
-		$data['modal_tambah_user'] = show_my_modal('modals/modal_tambah_user', 'tambah-user', $data);
+		$data['page'] = "manageStandar";
+		$data['judul'] = "Manage Data Standar";
+		$data['deskripsi'] = "Manage Data Standar";
+		$data['dataStandar'] = $this->M_ManageStandar->select_standar();
+		$data['dataTypeBorang'] = $this->M_ManageStandar->select_typeborang();
+		$data['dataStudy'] = $this->M_ManageStandar->select_study();
+		$data['modal_tambah_manageStandar'] = show_my_modal('modals/modal_tambah_manageStandar', 'tambah-manageStandar', $data);
 
-		$this->template->views('KelolaUser/home', $data);
+		$this->template->views('ManageStandar/home', $data);
 	}
 
 	public function tampil() {
-		$data['dataUser'] = $this->M_User->select_all();
-		$this->load->view('KelolaUser/list_data', $data);
+		$data['datamanageStandar'] = $this->M_ManageStandar->select_all();
+		
+		$this->load->view('ManageStandar/list_data', $data);
 	}
 
 	public function prosesTambah() {
-		$this->form_validation->set_rules('username', 'Username', 'trim|required');
-		$this->form_validation->set_rules('pwd', 'Password', 'trim|required');
-		$this->form_validation->set_rules('firstname', 'First Name', 'trim|required');
-		$this->form_validation->set_rules('lastname', 'Last Name', 'trim|required');
-		$this->form_validation->set_rules('role', 'Role', 'trim|required');
-		
+		$this->form_validation->set_rules('nmbutir', 'Nama Butir', 'trim|required');
+		$this->form_validation->set_rules('judulbutir', 'Judul Butir', 'trim|required');
+		$this->form_validation->set_rules('standar', 'Standar', 'trim|required');
+		$this->form_validation->set_rules('typeborang', 'Type Borang', 'trim|required');
+		$this->form_validation->set_rules('study', 'Study', 'trim|required');
+
 		$data = $this->input->post();
 		if ($this->form_validation->run() == TRUE) {
-			$result = $this->M_User->insert($data);
+			$result = $this->M_ManageStandar->insert($data);
+
 			if ($result > 0) {
 				$out['status'] = '';
-				$out['msg'] = show_succ_msg('Data User Berhasil ditambahkan', '20px');
+				$out['msg'] = show_succ_msg('Data Standar Berhasil ditambahkan', '20px');
 			} else {
 				$out['status'] = '';
-				$out['msg'] = show_err_msg('Data User Gagal ditambahkan', '20px');
+				$out['msg'] = show_err_msg('Data Standar Gagal ditambahkan', '20px');
 			}
 		} else {
 			$out['status'] = 'form';
@@ -52,32 +56,38 @@ class KelolaUser extends AUTH_Controller {
 	public function update() {
 		$id = trim($_POST['id']);
 
-		$data['dataUser'] = $this->M_User->select_by_id($id);
+		$data['dataManageStandar'] = $this->M_ManageStandar->select_by_id($id);
 		
-		$data['dataRole'] = $this->M_User->select_role();
+		$data['dataStandar'] = $this->M_ManageStandar->select_standar();
 
+		$data['dataTypeBorang'] = $this->M_ManageStandar->select_typeborang();
+
+		$data['dataStudy'] = $this->M_ManageStandar->select_study();
+		
 		$data['userdata'] = $this->userdata;
 
-
-		echo show_my_modal('modals/modal_update_user', 'update-user', $data);
+		echo show_my_modal('modals/modal_update_managestandar','ubah-managestandar' ,$data);
+		
 	}
 
 	public function prosesUpdate() {
-		$this->form_validation->set_rules('username', 'Username', 'trim|required');
-		$this->form_validation->set_rules('pwd', 'Password', 'trim|required');
-		$this->form_validation->set_rules('firstname', 'First Name', 'trim|required');
-		$this->form_validation->set_rules('lastname', 'Last Name', 'trim|required');
+		$this->form_validation->set_rules('nmbutir', 'Nama Butir', 'trim|required');
+		$this->form_validation->set_rules('judulbutir', 'Judul Butir', 'trim|required');
+		$this->form_validation->set_rules('standar', 'Standar', 'trim|required');
+		$this->form_validation->set_rules('typeborang', 'Type Borang', 'trim|required');
+		$this->form_validation->set_rules('study', 'Study', 'trim|required');
+		
 
 		$data = $this->input->post();
 		if ($this->form_validation->run() == TRUE) {
-			$result = $this->M_User->update($data);
+			$result = $this->M_ManageStandar->update($data);
 
 			if ($result > 0) {
 				$out['status'] = '';
-				$out['msg'] = show_succ_msg('Data User Berhasil diupdate', '20px');
+				$out['msg'] = show_succ_msg('Data Standar Berhasil diupdate', '20px');
 			} else {
 				$out['status'] = '';
-				$out['msg'] = show_succ_msg('Data User Gagal diupdate', '20px');
+				$out['msg'] = show_succ_msg('Data Standar Gagal diupdate', '20px');
 			}
 		} else {
 			$out['status'] = 'form';
@@ -89,12 +99,12 @@ class KelolaUser extends AUTH_Controller {
 
 	public function delete() {
 		$id = $_POST['id'];
-		$result = $this->M_User->delete($id);
+		$result = $this->M_ManageStandar->delete($id);
 
 		if ($result > 0) {
-			echo show_succ_msg('Data User Berhasil dihapus', '20px');
+			echo show_succ_msg('Data Standar Berhasil dihapus', '20px');
 		} else {
-			echo show_err_msg('Data User Gagal dihapus', '20px');
+			echo show_err_msg('Data Standar Gagal dihapus', '20px');
 		}
 	}
 
@@ -104,7 +114,7 @@ class KelolaUser extends AUTH_Controller {
 		include_once './assets/phpexcel/Classes/PHPExcel.php';
 		$objPHPExcel = new PHPExcel();
 
-		$data = $this->M_User->select_all_pegawai();
+		$data = $this->M_pegawai->select_all_pegawai();
 
 		$objPHPExcel = new PHPExcel(); 
 		$objPHPExcel->setActiveSheetIndex(0); 
@@ -200,5 +210,5 @@ class KelolaUser extends AUTH_Controller {
 	}
 }
 
-/* End of file KelolaUser.php */
-/* Location: ./application/controllers/KelolaUser.php */
+/* End of file Pegawai.php */
+/* Location: ./application/controllers/Pegawai.php */

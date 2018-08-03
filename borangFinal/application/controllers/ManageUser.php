@@ -50,19 +50,21 @@ class ManageUser extends AUTH_Controller {
 	public function update() {
 		$id = trim($_POST['id']);
 
-		$data['dataPegawai'] = $this->M_ManageUser->select_by_id($id);
-		$data['dataPosisi'] = $this->M_ManageUser->select_all();
-		$data['dataKota'] = $this->M_ManageUser->select_all();
+		$data['dataManageUser'] = $this->M_ManageUser->select_by_id($id);
+		
+		$data['dataRole'] = $this->M_ManageUser->select_role();
+
+		$data['dataPermission'] = $this->M_ManageUser->select_permission_byid($id);
+		
 		$data['userdata'] = $this->userdata;
 
-		echo show_my_modal('modals/modal_update_user', $data);
+		echo show_my_modal('modals/modal_update_manageuser','ubah-manageuser' ,$data);
+		
 	}
 
 	public function prosesUpdate() {
-		$this->form_validation->set_rules('nama', 'Nama', 'trim|required');
-		$this->form_validation->set_rules('kota', 'Kota', 'trim|required');
-		$this->form_validation->set_rules('jk', 'Jenis Kelamin', 'trim|required');
-		$this->form_validation->set_rules('posisi', 'Posisi', 'trim|required');
+		$this->form_validation->set_rules('role', 'Role', 'trim|required');
+		
 
 		$data = $this->input->post();
 		if ($this->form_validation->run() == TRUE) {
@@ -85,12 +87,12 @@ class ManageUser extends AUTH_Controller {
 
 	public function delete() {
 		$id = $_POST['id'];
-		$result = $this->M_pegawai->delete($id);
+		$result = $this->M_ManageUser->delete($id);
 
 		if ($result > 0) {
-			echo show_succ_msg('Data User Berhasil dihapus', '20px');
+			echo show_succ_msg('Data Manage User Berhasil dihapus', '20px');
 		} else {
-			echo show_err_msg('Data User Gagal dihapus', '20px');
+			echo show_err_msg('Data Manage User Gagal dihapus', '20px');
 		}
 	}
 

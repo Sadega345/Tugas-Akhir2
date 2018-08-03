@@ -26,6 +26,14 @@
           <span>Manage Data User</span>
         </a>
       </li>
+
+      <li <?php if ($page == 'manageStandar') {echo 'class="active"';} ?>>
+        <a href="<?php echo base_url('ManageStandar'); ?>">
+          <i class="fa fa-user"></i>
+          <span>Manage Data Standar</span>
+        </a>
+      </li>
+
       <?php if($this->session->userdata('fakultas') != ""){?>
         <li <?php if ($page == 'Fakultas') {echo 'class="active"';} ?>>
         <a href="<?php echo base_url('Fakultas'); ?>">
@@ -42,7 +50,7 @@
       </li>
      <?php } ?>
      <?php if($this->session->userdata('instrumen') != "") { ?>
-    <li <?php if ($page == 'instrumen') {echo 'class="active"';} ?>>
+      <li <?php if ($page == 'instrumen') {echo 'class="active"';} ?>>
         <a href="<?php echo base_url('Instrumen'); ?>">
           <i class="fa fa-file"></i>
           <span>
