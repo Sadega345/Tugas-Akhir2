@@ -14,25 +14,20 @@ class ManageStandar extends AUTH_Controller {
 		$data['judul'] = "Manage Data Standar";
 		$data['deskripsi'] = "Manage Data Standar";
 		$data['dataStandar'] = $this->M_ManageStandar->select_standar();
-		$data['dataTypeBorang'] = $this->M_ManageStandar->select_typeborang();
-		$data['dataStudy'] = $this->M_ManageStandar->select_study();
+		
 		$data['modal_tambah_manageStandar'] = show_my_modal('modals/modal_tambah_manageStandar', 'tambah-manageStandar', $data);
 
 		$this->template->views('ManageStandar/home', $data);
 	}
 
 	public function tampil() {
-		$data['datamanageStandar'] = $this->M_ManageStandar->select_all();
+		$data['datamanageStandar'] = $this->M_ManageStandar->select_standar();
 		
 		$this->load->view('ManageStandar/list_data', $data);
 	}
 
 	public function prosesTambah() {
-		$this->form_validation->set_rules('nmbutir', 'Nama Butir', 'trim|required');
-		$this->form_validation->set_rules('judulbutir', 'Judul Butir', 'trim|required');
-		$this->form_validation->set_rules('standar', 'Standar', 'trim|required');
-		$this->form_validation->set_rules('typeborang', 'Type Borang', 'trim|required');
-		$this->form_validation->set_rules('study', 'Study', 'trim|required');
+		$this->form_validation->set_rules('nmstandar', 'Nama Butir', 'trim|required');
 
 		$data = $this->input->post();
 		if ($this->form_validation->run() == TRUE) {
@@ -58,12 +53,6 @@ class ManageStandar extends AUTH_Controller {
 
 		$data['dataManageStandar'] = $this->M_ManageStandar->select_by_id($id);
 		
-		$data['dataStandar'] = $this->M_ManageStandar->select_standar();
-
-		$data['dataTypeBorang'] = $this->M_ManageStandar->select_typeborang();
-
-		$data['dataStudy'] = $this->M_ManageStandar->select_study();
-		
 		$data['userdata'] = $this->userdata;
 
 		echo show_my_modal('modals/modal_update_managestandar','ubah-managestandar' ,$data);
@@ -71,12 +60,7 @@ class ManageStandar extends AUTH_Controller {
 	}
 
 	public function prosesUpdate() {
-		$this->form_validation->set_rules('nmbutir', 'Nama Butir', 'trim|required');
-		$this->form_validation->set_rules('judulbutir', 'Judul Butir', 'trim|required');
-		$this->form_validation->set_rules('standar', 'Standar', 'trim|required');
-		$this->form_validation->set_rules('typeborang', 'Type Borang', 'trim|required');
-		$this->form_validation->set_rules('study', 'Study', 'trim|required');
-		
+		$this->form_validation->set_rules('nmstandar', 'Nama Butir', 'trim|required');		
 
 		$data = $this->input->post();
 		if ($this->form_validation->run() == TRUE) {

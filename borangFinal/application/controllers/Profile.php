@@ -11,7 +11,7 @@ class Profile extends AUTH_Controller {
 		$data['userdata'] 		= $this->userdata;
 		
 		$data['page'] 			= "settingAdmin";
-		$data['judul'] 			= "Setting Admin";
+		$data['judul'] 			= "Setting Password";
 		$data['deskripsi'] 		= "Setting Admin";
 		$this->template->views('profile', $data);
 	}

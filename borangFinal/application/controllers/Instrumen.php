@@ -27,7 +27,7 @@ class Instrumen extends AUTH_Controller {
 	public function do_upload() {
 
 		$config['upload_path']="./assets/instrumen";
-        $config['allowed_types']='xlsx|docs|pdf';
+        $config['allowed_types']='xlsx|docx|pdf';
         $config['encrypt_name'] = TRUE;
          
         $this->load->library('upload',$config);

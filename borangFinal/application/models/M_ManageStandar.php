@@ -24,43 +24,8 @@ class M_ManageStandar extends CI_Model {
 		return $data->result();
 	}
 
-	public function select_typeborang() {
-		$this->db->select('*');
-		$this->db->from('mst_typeborang');
-
-		$data = $this->db->get();
-
-		return $data->result();
-	}
-
-	public function select_study() {
-		$this->db->select('*');
-		$this->db->from('mst_study');
-
-		$data = $this->db->get();
-
-		return $data->result();
-	}
-
-	public function select_role_byid(){
-		$sql = "SELECT DISTINCT u.role_id,r.role_name FROM USER u INNER JOIN role r WHERE u.role_id=r.role_id";
-
-		$data = $this->db->query($sql);
-
-		return $data->result();
-	}
-
-	public function select_permission_byid($id){
-		$sql = "SELECT DISTINCT data_user,instrumen,borang,standar,mhslulusan,fakultas,prodi,keuangan,logistik,dosen,jurnalilmiah FROM permission WHERE permission_id='".$id."'";
-
-
-		$data = $this->db->query($sql);
-
-		return $data->result();
-	}
-
 	public function select_by_id($id) {
-		$sql = "SELECT * FROM mst_butir WHERE butir_id = '" .$id ."'";
+		$sql = "SELECT * FROM mst_standar WHERE standar_id = '" .$id ."'";
 
 		$data = $this->db->query($sql);
 
@@ -68,7 +33,7 @@ class M_ManageStandar extends CI_Model {
 	}
 
 	public function delete($id) {
-		$sql = "DELETE FROM mst_butir WHERE butir_id='" .$id ."'";
+		$sql = "DELETE FROM mst_standar WHERE standar_id='" .$id ."'";
 
 		$this->db->query($sql);
 
@@ -76,12 +41,8 @@ class M_ManageStandar extends CI_Model {
 	}
 
 	public function insert($data) {
-		$sql = "INSERT INTO mst_butir  VALUES(0,
-												'" .$data['nmbutir'] ."',
-												'" .$data['judulbutir'] ."',
-												" .$data['standar'] .",
-												" .$data['typeborang'] .",
-												" .$data['study'] .")";
+		$sql = "INSERT INTO mst_standar  VALUES(0,
+												'".$data['nmstandar']."')";
 
 		// $sql = "INSERT INTO mst_butir VALUES(
 		// 										0,'7.2.2','JUMLAH DAN DANA KEGIATAN SOSIAL',7,2,3
@@ -93,14 +54,10 @@ class M_ManageStandar extends CI_Model {
 	}
 
 	public function update($data) {
-		$sql = "UPDATE mst_butir SET 
-						butir_name='" .$data['nmbutir'] ."',
-						title='" .$data['judulbutir'] ."',
-						standar_id='" .$data['standar'] ."',
-						type_borang='" .$data['typeborang'] ."',
-						study_id='" .$data['study'] ."'
+		$sql = "UPDATE mst_standar SET 
+						standar_name='" .$data['nmstandar'] ."'
 
-						WHERE butir_id='" .$data['id'] ."'";
+						WHERE standar_id='" .$data['id'] ."'";
 
 		$this->db->query($sql);
 

@@ -23,50 +23,17 @@
       </select>
     </div>
     <!-- Checkbox -->
-    <div class="row">
-      <div class="col-md-6">
-        <input type="checkbox" name="datauser" value="Data User">Kelola Data User
-      </div>
-      <div class="col-md-6">
-        <input type="checkbox" name="instrumen" value="Data Instrumen">Kelola Data Instrumen
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6">
-        <input type="checkbox" name="borang" value="Data Borang">Kelola Data Borang
-      </div>
-      <div class="col-md-6">
-        <input type="checkbox" name="standar" value="Kelola Standar">Kelola standar
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6">
-        <input type="checkbox" name="mhslulusan" value="Data Mahasiswa Dan lulusan">Kelola Data Mahasiswa dan Lulusan
-      </div>
-      <div class="col-md-6">
-        <input type="checkbox" name="fakultas" value="Fakultas">Kelola Fakultas
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6">
-        <input type="checkbox" name="prodi" value="Prodi">Kelola Prodi
-      </div>
-      <div class="col-md-6">
-        <input type="checkbox" name="keuangan" value="Keuangan">Kelola Data Keuangan
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6">
-        <input type="checkbox" name="logistik" value="Logistik">Kelola Data Logistik
-      </div>
-      <div class="col-md-6">
-        <input type="checkbox" name="dosen" value="Dosen">Kelola Data Dosen
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6">
-        <input type="checkbox" name="jurnalilmiah" value="Jurnal">Kelola Data Jurnal dan artikel ilmiah
-      </div>
+    <div class="input-group form-group">      
+        <?php
+        foreach ($dataMenu as $menu) {
+          ?>
+          <input type="hidden" name="id[]" value="<?php echo $menu->id_historis; ?>">
+          <input type="checkbox" name="menu[]" value="<?php echo $menu->nama_table; ?>">
+          <?php echo $menu->nama_table; ?>
+          <br>
+          <?php
+        }
+        ?>    
     </div>
 
     <div class="form-group">

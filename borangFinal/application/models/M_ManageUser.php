@@ -8,7 +8,7 @@ class M_ManageUser extends CI_Model {
 
 		//$data = $this->db->get();0
 
-		$sql = "SELECT u.*, r.role_name FROM USER u, role r WHERE u.role_id=r.role_id";
+		$sql = "SELECT p.role_id,p.permission_id,p.id_historis,p.nama_modul,r.role_name FROM role_permission p, role r WHERE p.role_id=r.role_id";
 
 		$data = $this->db->query($sql);
 
@@ -35,6 +35,14 @@ class M_ManageUser extends CI_Model {
 	public function select_permission_byid($id){
 		$sql = "SELECT DISTINCT data_user,instrumen,borang,standar,mhslulusan,fakultas,prodi,keuangan,logistik,dosen,jurnalilmiah FROM permission WHERE permission_id='".$id."'";
 
+		$data = $this->db->query($sql);
+
+		return $data->result();
+	}
+
+	public function select_historis(){
+		$sql = "SELECT * FROM mst_historis ";
+
 
 		$data = $this->db->query($sql);
 
@@ -42,7 +50,7 @@ class M_ManageUser extends CI_Model {
 	}
 
 	public function select_by_id($id) {
-		$sql = "SELECT * FROM user WHERE user_id = '" .$id ."'";
+		$sql = "SELECT * FROM role_permission where permission_id= '".$id."' ";
 
 		$data = $this->db->query($sql);
 
@@ -50,7 +58,7 @@ class M_ManageUser extends CI_Model {
 	}
 
 	public function delete($id) {
-		$sql = "DELETE FROM user WHERE user_id='" .$id ."'";
+		$sql = "DELETE FROM role_permission WHERE permission_id='" .$id ."'";
 
 		$this->db->query($sql);
 
@@ -58,40 +66,46 @@ class M_ManageUser extends CI_Model {
 	}
 
 	public function insert($data) {
-		$sql = "INSERT INTO permission  VALUES(0,
-												" .$data['role'] .",
-												'" .$data['datauser'] ."',
-												'" .$data['instrumen'] ."',
-												'" .$data['borang'] ."',
-												'" .$data['standar'] ."',
-
-												'" .$data['mhslulusan'] ."',
-												'" .$data['fakultas'] ."',
-												'" .$data['prodi'] ."',
-
-												'" .$data['keuangan'] ."',
-												'" .$data['logistik'] ."',
-												'" .$data['dosen'] ."',
-												'" .$data['jurnalilmiah'] ."')";
-
-		// $sql = "INSERT INTO permission VALUES(
-		// 										0,1,'dataUser','Instrumen','Borang','Standar','MhsLulusan',
-		// 										'Fakultas','Prodi','Keuangan','Logistik','Dosen','JurnalIlmiah'
-		// 									)";
-
-		$this->db->query($sql);
-
+		$menu = $data['menu'];
+		$idhistoris = $data['id'];
+		$sql = "";
+		
+		for($i =0; $i < count($menu); $i++){
+				$sql = "INSERT INTO role_permission  VALUES(0,
+												" .$data['role'].",
+												".$idhistoris[$i].",
+												'" .$menu[$i]."'
+											);";
+				$this->db->query($sql);							
+		}
+		
 		return $this->db->affected_rows();
 	}
 
 	public function update($data) {
-		$sql = "UPDATE user SET 
-						username='" .$data['username'] ."',
-						pwd='" .$data['pwd'] ."',
-						firstname='" .$data['firstname'] ."',
-						lastname='" .$data['lastname'] ."'
+		$sqlDataUser = "";
 
-						WHERE user_id='" .$data['id'] ."'";
+		if(isset($data['datauser'])){
+			$sqlDataUser .= " data_user = '".$data['datauser']."',";
+		}
+		if(isset($data['instrumen'])){
+			$sqlDataUser .= " instrumen = '".$data['instrumen']."',";
+		}
+		if(isset($data['borang'])){
+			$sqlDataUser .= " borang = '".$data['borang']."',";
+		}
+		if(isset($data['standar'])){
+			$sqlDataUser .= " standar = '".$data['standar']."',";
+		}
+
+		$cekkoma = substr($sqlDataUser, (strlen($sqlDataUser)-1));
+		if($cekkoma==","){
+			$sqlDataUser = substr($sqlDataUser,1,(strlen($sqlDataUser)-2));
+		}
+		$sql = "UPDATE permission SET 
+						".$sqlDataUser."
+						WHERE role_id=" .$data['id'];
+
 
 		$this->db->query($sql);
 

@@ -4,10 +4,17 @@
 
 		function __construct() {
 			$this->_ci = &get_instance(); //Untuk Memanggil function load, dll dari CI. ex: $this->load, $this->model, dll
+			//$this->load->model('M_MasterMenu');
+			 // $this->load->library('session');
 		}
 
 		function views($template = NULL, $data = NULL) {
 			if ($template != NULL) {
+				
+				//$user_id  =   $this->session->userdata('user_id');
+				//$data['_listmenu'] = $this->M_MasterMenu->select_menu($user_id);
+
+
 				// head
 				$data['_meta'] 					= $this->_ci->load->view('_layout/_meta', $data, TRUE);
 				$data['_css'] 					= $this->_ci->load->view('_layout/_css', $data, TRUE);

@@ -4,23 +4,23 @@
   <h3 style="display:block; text-align:center;">Tambah Standar</h3>
 
   <form id="form-tambah-manageStandar" method="POST">
-    <!-- Nama Butir -->
+    <!-- Nama Standar -->
     <div class="input-group form-group">
       <span class="input-group-addon" id="sizing-addon2">
         <i class="glyphicon glyphicon-user"></i>
       </span>
-      <input type="text" class="form-control" placeholder="Nama Butir" name="nmbutir" aria-describedby="sizing-addon2">
+      <input type="text" class="form-control" placeholder="Nama Standar" name="nmstandar" aria-describedby="sizing-addon2">
     </div>
 
-    <!-- Judul Butir -->
-    <div class="input-group form-group">
+    <!-- Judul Standar -->
+    <!-- <div class="input-group form-group">
       <span class="input-group-addon" id="sizing-addon2">
         <i class="glyphicon glyphicon-user"></i>
       </span>
       <input type="text" class="form-control" placeholder="Judul Butir" name="judulbutir" aria-describedby="sizing-addon2">
-    </div>
+    </div> -->
     <!-- Standar -->
-    <div class="input-group form-group">
+    <!-- <div class="input-group form-group">
       <span class="input-group-addon" id="sizing-addon2">
         <i class="glyphicon glyphicon-user"></i>
       </span>
@@ -36,10 +36,10 @@
         }
         ?>
       </select>
-    </div>
+    </div> -->
 
     <!-- Type Bprang -->
-    <div class="input-group form-group">
+    <!-- <div class="input-group form-group">
       <span class="input-group-addon" id="sizing-addon2">
         <i class="glyphicon glyphicon-user"></i>
       </span>
@@ -55,10 +55,10 @@
         }
         ?>
       </select>
-    </div>
+    </div> -->
 
     <!-- Study -->
-    <div class="input-group form-group">
+    <!-- <div class="input-group form-group">
       <span class="input-group-addon" id="sizing-addon2">
         <i class="glyphicon glyphicon-user"></i>
       </span>
@@ -74,7 +74,7 @@
         }
         ?>
       </select>
-    </div>
+    </div> -->
 
     <div class="form-group">
       <div class="col-md-12">

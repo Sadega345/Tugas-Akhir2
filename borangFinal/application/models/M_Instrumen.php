@@ -12,18 +12,18 @@ class M_Instrumen extends CI_Model {
 	}
 
 	public function simpan_upload($judul,$file) {
-		$sql = "INSERT INTO tbl_instrumen VALUES(0,'Bio Dodo','buat jumlah 4.3.3.docx')";
+		// $sql = "INSERT INTO tbl_instrumen VALUES(0,'Bio Dodo','buat jumlah 4.3.3.docx')";
 
-		$this->db->query($sql);
+		// $this->db->query($sql);
 
-		return $this->db->affected_rows();
+		// return $this->db->affected_rows();
 
-		// $data = array(
-  //               'instrumen_name' => $judul,
-  //               'file' => $file
-  //           );  
-  //       $result= $this->db->insert('tbl_instrumen',$data);
-  //       return $result;
+		$data = array(
+                'instrumen_name' => $judul,
+                'file' => $file
+            );  
+        $result= $this->db->insert('tbl_instrumen',$data);
+        return $result;
 	}
 
 	public function delete($id) {

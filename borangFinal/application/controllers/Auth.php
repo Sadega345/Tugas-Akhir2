@@ -26,6 +26,7 @@ class Auth extends CI_Controller {
 			$password = trim($_POST['password']);
 
 			$data = $this->M_auth->login($username, $password);
+			
 
 			if ($data == false) {
 				$this->session->set_flashdata('error_msg', 'Username / Password Anda Salah.');
@@ -36,7 +37,7 @@ class Auth extends CI_Controller {
 					'status' => "Loged in"
 				];
 				$this->session->set_userdata($session);
-				$sql = "SELECT p.role_id,p.data_user,p.instrumen,p.borang,p.standar,p.mhslulusan,p.fakultas,p.prodi,p.keuangan,p.logistik,p.dosen,p.jurnalilmiah FROM permission p INNER JOIN USER u WHERE p.role_id=u.role_id AND u.username="."'$username '"."AND u.pwd="."'$password'";
+				$sql = "SELECT u.user_id, p.role_id,p.data_user,p.instrumen,p.borang,p.standar,p.mhslulusan,p.fakultas,p.prodi,p.keuangan,p.logistik,p.dosen,p.jurnalilmiah FROM permission p INNER JOIN USER u WHERE p.role_id=u.role_id AND u.username="."'$username '"."AND u.pwd="."'$password'";
 
 				$data = $this->db->query($sql);
 				
@@ -55,7 +56,8 @@ class Auth extends CI_Controller {
 					'keuangan' => $result->keuangan,
 					'logistik' => $result->logistik,
 					'dosen' => $result->dosen,
-					'jurnalilmiah' => $result->jurnalilmiah
+					'jurnalilmiah' => $result->jurnalilmiah,
+					'user_id' => $result->user_id
 				);
 				$this->session->set_userdata($session_data);
 				

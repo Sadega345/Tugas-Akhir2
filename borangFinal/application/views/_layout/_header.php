@@ -4,7 +4,7 @@
     <!-- mini logo for sidebar mini 50x50 pixels -->
     <span class="logo-mini"><small>CRUD</small></span>
     <!-- logo for regular state and mobile devices -->
-    <span class="logo-lg"><b>Admin</b>
+    <span class="logo-lg"><b><?php echo $userdata->username; ?></b>
   </a>
 
   <!-- nav -->

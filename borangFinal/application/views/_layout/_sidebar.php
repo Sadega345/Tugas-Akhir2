@@ -1,3 +1,7 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <aside class="main-sidebar">
   <!-- sidebar: style can be found in sidebar.less -->
   <section class="sidebar">
@@ -30,9 +34,33 @@
       <li <?php if ($page == 'manageStandar') {echo 'class="active"';} ?>>
         <a href="<?php echo base_url('ManageStandar'); ?>">
           <i class="fa fa-user"></i>
-          <span>Manage Data Standar</span>
+          <span>Master Data Standar</span>
         </a>
       </li>
+
+      <li <?php if ($page == 'masterButir') {echo 'class="active"';} ?>>
+        <a href="<?php echo base_url('MasterButir'); ?>">
+          <i class="fa fa-user"></i>
+          <span>Master Data Butir</span>
+        </a>
+      </li>
+
+      <li <?php if ($page == 'createTable') {echo 'class="active"';} ?>>
+        <a href="<?php echo base_url('CreateTable'); ?>">
+          <i class="fa fa-user"></i>
+          <span>Manage Data Butir</span>
+        </a>
+      </li>
+
+      <?php 
+
+     //  foreach ($_listmenu as $value ){
+
+
+     //   }
+      ?>
+        
+   
 
       <?php if($this->session->userdata('fakultas') != ""){?>
         <li <?php if ($page == 'Fakultas') {echo 'class="active"';} ?>>
@@ -41,7 +69,7 @@
           <span>
             <?php 
             // if (!is_null($this->session->userdata('fakultas'))):
-            echo $this->session->userdata('fakultas'); 
+            echo $this->session->userdata('fakultas');
             
             ?>
               
@@ -62,19 +90,28 @@
         </a>
       </li>
       <?php } ?>
-       <li <?php if ($page == 'dataBorang') {echo 'class="active"';} ?>>
+       <!-- <li <?php if ($page == 'dataBorang') {echo 'class="active"';} ?>>
         <a href="<?php echo base_url('dataBorang'); ?>">
           <i class="fa fa-briefcase"></i>
           <span>Data Borang</span>
         </a>
-      </li>
+      </li> -->
        <li <?php if ($page == 'profile') {echo 'class="active"';} ?>>
         <a href="<?php echo base_url('Profile'); ?>">
           <i class="fa fa-cog"></i>
-          <span>Setting Admin</span>
+          <span>Setting Akun</span>
         </a>
       </li>
       
+      <!-- <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Example
+        <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+          <li><a href="#">HTML</a></li>
+          <li><a href="#">CSS</a></li>
+          <li><a href="#">JavaScript</a></li>
+        </ul>
+      </div> -->
       
     </ul>
     <!-- /.sidebar-menu -->

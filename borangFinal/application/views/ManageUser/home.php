@@ -19,9 +19,9 @@
     <table id="list-data" class="table table-bordered table-striped">
       <thead>
         <tr>
-          <th>Nama User</th>
-          <th>Username</th>
-          <th>Role</th>
+          <th>Jabatan</th>
+          <th>Akses Menu</th>
+          
           <th style="text-align: center;">Aksi</th>
         </tr>
       </thead>

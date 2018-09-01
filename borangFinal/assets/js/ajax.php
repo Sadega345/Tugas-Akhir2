@@ -16,6 +16,8 @@
 		tampilManageUser();
 		tampilInstrumen();
 		tampilStandar();
+		tampilButir();
+		tampilCreateTable();
 		<?php
 			if ($this->session->flashdata('msg') != '') {
 				echo "effect_msg();";
@@ -418,31 +420,9 @@
 		})
 	})
 
-	$(document).on("click", ".detail-dataManageUser", function() {
-		var id = $(this).attr("data-id");
-		
-		$.ajax({
-			method: "POST",
-			url: "<?php echo base_url('ManageUser/detail'); ?>",
-			data: "id=" +id
-		})
-		.done(function(data) {
-			$('#tempat-modal').html(data);
-			$('#tabel-detail').dataTable({
-				  "paging": true,
-				  "lengthChange": false,
-				  "searching": true,
-				  "ordering": true,
-				  "info": true,
-				  "autoWidth": false
-				});
-			$('#detail-manageUser').modal('show');
-		})
-	})
-
 	$('#form-tambah-manageUser').submit(function(e) {
 		var data = $(this).serialize();
-
+		// alert('masuk');
 		$.ajax({
 			method: 'POST',
 			url: '<?php echo base_url('ManageUser/prosesTambah'); ?>',
@@ -450,7 +430,7 @@
 		})
 		.done(function(data) {
 			var out = jQuery.parseJSON(data);
-		
+			// alert(out);
 			tampilManageUser();
 			if (out.status == 'form') {
 				$('.form-msg').html(out.msg);
@@ -476,14 +456,14 @@
 		})
 		.done(function(data) {
 			var out = jQuery.parseJSON(data);
-
-			tampilKota();
+			
+			tampilManageUser();
 			if (out.status == 'form') {
 				$('.form-msg').html(out.msg);
 				effect_msg_form();
 			} else {
 				document.getElementById("form-update-manageUser").reset();
-				$('#update-manageUser').modal('hide');
+				$('#ubah-manageuser').modal('hide');
 				$('.msg').html(out.msg);
 				effect_msg();
 			}
@@ -704,10 +684,11 @@
 	var id_standar;
 	$(document).on("click", ".konfirmasiHapus-manageStandar", function() {
 		id_standar = $(this).attr("data-id");
+		
 	})
 	$(document).on("click", ".hapus-dataStandar", function() {
 		var id = id_standar;
-		
+		alert(id);
 		$.ajax({
 			method: "POST",
 			url: "<?php echo base_url('ManageStandar/delete'); ?>",
@@ -738,7 +719,7 @@
 
 	$('#form-tambah-manageStandar').submit(function(e) {
 		var data = $(this).serialize();
-
+		// alert('masuk');
 		$.ajax({
 			method: 'POST',
 			url: '<?php echo base_url('ManageStandar/prosesTambah'); ?>',
@@ -746,7 +727,7 @@
 		})
 		.done(function(data) {
 			var out = jQuery.parseJSON(data);
-			// alert('masuk');
+			
 			tampilStandar();
 			if (out.status == 'form') {
 				$('.form-msg').html(out.msg);
@@ -795,4 +776,185 @@
 	$('#update-manageStandar').on('hidden.bs.modal', function () {
 	  $('.form-msg').html('');
 	})
+
+	//Master Butir
+	function tampilButir() {
+		$.get('<?php echo base_url('MasterButir/tampil'); ?>', function(data) {
+			MyTable.fnDestroy();
+			$('#data-masterButir').html(data);
+			refresh();
+		});
+	}
+
+	var id_butir;
+	$(document).on("click", ".konfirmasiHapus-masterButir", function() {
+		id_butir = $(this).attr("data-id");
+	
+	})
+	$(document).on("click", ".hapus-dataButir", function() {
+		var id = id_butir;
+		// alert(id);
+		$.ajax({
+			method: "POST",
+			url: "<?php echo base_url('MasterButir/delete'); ?>",
+			data: "id=" +id
+		})
+		.done(function(data) {
+			$('#konfirmasiHapus').modal('hide');
+			tampilButir();
+			$('.msg').html(data);
+			effect_msg();
+		})
+	})
+
+	$(document).on("click", ".update-datamasterButir", function() {
+		var id = $(this).attr("data-id");
+		
+		$.ajax({
+			method: "POST",
+			url: "<?php echo base_url('MasterButir/update'); ?>",
+			data: "id=" +id
+		})
+		.done(function(data) {
+			// alert('tes');
+			$('#ubah-masterButir').html(data);
+			$('#ubah-masterbutir').modal('show');
+		})
+	})
+
+	$('#form-tambah-masterButir').submit(function(e) {
+		var data = $(this).serialize();
+		// alert('masuk');
+		$.ajax({
+			method: 'POST',
+			url: '<?php echo base_url('MasterButir/prosesTambah'); ?>',
+			data: data
+		})
+		.done(function(data) {
+			var out = jQuery.parseJSON(data);
+			
+			tampilButir();
+			if (out.status == 'form') {
+				$('.form-msg').html(out.msg);
+				effect_msg_form();
+			} else {
+				document.getElementById("form-tambah-masterButir").reset();
+				$('#tambah-masterButir').modal('hide');
+				$('.msg').html(out.msg);
+				effect_msg();
+			}
+		})
+		
+		e.preventDefault();
+	});
+
+	$(document).on('submit', '#form-update-masterButir', function(e){
+		var data = $(this).serialize();
+		// alert('masuk');
+		$.ajax({
+			method: 'POST',
+			url: '<?php echo base_url('MasterButir/prosesUpdate'); ?>',
+			data: data
+		})
+		.done(function(data) {
+			var out = jQuery.parseJSON(data);
+
+			tampilButir();
+			if (out.status == 'form') {
+				$('.form-msg').html(out.msg);
+				effect_msg_form();
+			} else {
+				document.getElementById("form-update-masterButir").reset();
+				$('#ubah-masterbutir').modal('hide');
+				$('.msg').html(out.msg);
+				effect_msg();
+			}
+		})
+		
+		e.preventDefault();
+	});
+
+	$('#tambah-masterButir').on('hidden.bs.modal', function () {
+	  $('.form-msg').html('');
+	});
+
+	$('#update-masterButir').on('hidden.bs.modal', function () {
+	  $('.form-msg').html('');
+	});
+
+
+	//ManageButir
+	function tampilCreateTable() {
+		$.get('<?php echo base_url('CreateTable/tampil'); ?>', function(data) {
+			MyTable.fnDestroy();
+			$('#data-createTable').html(data);
+			refresh();
+		});
+	}
+
+	var id_butir;
+	$(document).on("click", ".konfirmasiHapus-createTable", function() {
+		id_butir = $(this).attr("data-id");
+	
+	})
+	$(document).on("click", ".hapus-dataTable", function() {
+		var id = id_butir;
+		// alert(id);
+		$.ajax({
+			method: "POST",
+			url: "<?php echo base_url('CreateTable/delete'); ?>",
+			data: "id=" +id
+		})
+		.done(function(data) {
+			$('#konfirmasiHapus').modal('hide');
+			tampilCreateTable();
+			$('.msg').html(data);
+			effect_msg();
+		})
+	})
+
+	$(document).on("click", ".update-datacreateTable", function() {
+		var id = $(this).attr("data-id");
+		
+		$.ajax({
+			method: "POST",
+			url: "<?php echo base_url('CreateTable/update'); ?>",
+			data: "id=" +id
+		})
+		.done(function(data) {
+			// alert('tes');
+			$('#ubah-createTable').html(data);
+			$('#ubah-createTable').modal('show');
+		})
+	})
+
+	$('#form-tambah-createTable').submit(function(e) {
+		var data = $(this).serialize();
+		// alert('masuk');
+		$.ajax({
+			method: 'POST',
+			url: '<?php echo base_url('CreateTable/prosesTambah'); ?>',
+			data: data
+		})
+		.done(function(data) {
+			var out = jQuery.parseJSON(data);
+			
+			tampilCreateTable();
+			if (out.status == 'form') {
+				$('.form-msg').html(out.msg);
+				effect_msg_form();
+			} else {
+				document.getElementById("form-tambah-createTable").reset();
+				$('#tambah-createTable').modal('hide');
+				$('.msg').html(out.msg);
+				effect_msg();
+			}
+		})
+		
+		e.preventDefault();
+	});
+
+	$('#tambah-createTable').on('hidden.bs.modal', function () {
+	  $('.form-msg').html('');
+	});
 </script>

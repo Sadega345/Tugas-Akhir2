@@ -20,8 +20,6 @@
       <thead>
         <tr>
           <th>Nama Standar</th>
-          <th>Nama Butir</th>
-          <th>Judul</th>
           <th style="text-align: center;">Aksi</th>
         </tr>
       </thead>
@@ -37,8 +35,8 @@
 <div id="ubah-manageStandar"></div>
 
 <?php show_my_confirm('konfirmasiHapus', 'hapus-dataStandar', 'Hapus Data Ini?', 'Ya, Hapus Data Ini'); ?>
-<?php
+<!-- <?php
   $data['judul'] = 'User';
   $data['url'] = 'Pegawai/import';
   echo show_my_modal('modals/modal_import', 'import-pegawai', $data);
-?>
+?> -->

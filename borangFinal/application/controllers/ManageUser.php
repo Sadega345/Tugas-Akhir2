@@ -14,6 +14,7 @@ class ManageUser extends AUTH_Controller {
 		$data['judul'] = "Manage Data User";
 		$data['deskripsi'] = "Manage Data User";
 		$data['dataRole'] = $this->M_ManageUser->select_role();
+		$data['dataMenu'] = $this->M_ManageUser->select_historis();
 		$data['modal_tambah_manageUser'] = show_my_modal('modals/modal_tambah_manageUser', 'tambah-manageUser', $data);
 
 		$this->template->views('ManageUser/home', $data);
@@ -51,10 +52,10 @@ class ManageUser extends AUTH_Controller {
 		$id = trim($_POST['id']);
 
 		$data['dataManageUser'] = $this->M_ManageUser->select_by_id($id);
-		
-		$data['dataRole'] = $this->M_ManageUser->select_role();
 
-		$data['dataPermission'] = $this->M_ManageUser->select_permission_byid($id);
+		$data['dataMenu'] = $this->M_ManageUser->select_historis();
+
+		$data['dataRole'] = $this->M_ManageUser->select_role();
 		
 		$data['userdata'] = $this->userdata;
 
@@ -68,7 +69,7 @@ class ManageUser extends AUTH_Controller {
 
 		$data = $this->input->post();
 		if ($this->form_validation->run() == TRUE) {
-			$result = $this->M_pegawai->update($data);
+			$result = $this->M_ManageUser->update($data);
 
 			if ($result > 0) {
 				$out['status'] = '';

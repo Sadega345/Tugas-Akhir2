@@ -2,8 +2,8 @@
   <div class="form-msg"></div>
   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
   <h3 style="display:block; text-align:center;">Update Data User</h3>
-      <form method="POST" id="form-update-manageuser">
-        <input type="hidden" name="id" value="<?php echo $dataManageUser->user_id; ?>">
+      <form method="POST" id="form-update-manageUser">
+        <input type="hidden" name="id" value="<?php echo $dataManageUser->permission_id ?>">
         <!-- Jabatan -->
         <div class="input-group form-group">
           <span class="input-group-addon" id="sizing-addon2">
@@ -20,61 +20,37 @@
           </select>
         </div>
         <!-- Checkbox -->
-        
-        <div class="row">
+        <div class="input-group form-group">      
+        <?php
+        $idx = 0;
+        foreach ($dataMenu as $menu) {
+          ?>
+            <input type="hidden" name="id[]" value="<?php echo $menu->id_historis; ?>">
+            <input type="checkbox" name="menu[]" value="<?php echo $menu->nama_table; ?>" >
+          <?php echo $menu->nama_table."<br>"; ?>
+
+            <input type="checkbox" name="menu[]" value="<?php echo $menu->nama_table; ?>" <?php if($menu->nama_table == $dataManageUser->nama_modul){ echo "checked"; }else{ echo $menu->nama_table; ?> >
+          <?php echo $menu->nama_table."<br>"; ?>
+          <br>
+          <?php }  ?>
+          
+          <?php
+        }
+        ?>    
+        </div>
+
+        <!-- <div class="row">
           
           <div class="col-md-6">
-            <?php 
-          foreach ($dataPermission as $data) {
-          
-         ?>
-            <input type="checkbox" name="datauser" value="DataUser" <?php if ($data->data_user == "Data User") {
+          <?php 
+            foreach ($dataPermission as $data) {
+          ?>
+            <input type="checkbox" name="datauser" value="Data User" <?php if ($data->data_user == "Data User") {
               echo "checked";
             } ?>>Kelola Data User
             <?php } ?>
-          </div>
-        
-          <div class="col-md-6">
-            <input type="checkbox" name="instrumen" >Kelola Data Instrumen
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6">
-            <input type="checkbox" name="borang" value="v">Kelola Data Borang
-          </div>
-          <div class="col-md-6">
-            <input type="checkbox" name="standar" value="v">Kelola standar
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6">
-            <input type="checkbox" name="mhslulusan" value="v">Kelola Data Mahasiswa dan Lulusan
-          </div>
-          <div class="col-md-6">
-            <input type="checkbox" name="fakultas" value="v">Kelola Fakultas
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6">
-            <input type="checkbox" name="prodi" value="v">Kelola Prodi
-          </div>
-          <div class="col-md-6">
-            <input type="checkbox" name="keuangan" value="v">Kelola Data Keuangan
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6">
-            <input type="checkbox" name="logistik" value="v">Kelola Data Logistik
-          </div>
-          <div class="col-md-6">
-            <input type="checkbox" name="dosen" value="v">Kelola Data Dosen
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6">
-            <input type="checkbox" name="jurnalilmiah" value="v">Kelola Data Jurnal dan artikel ilmiah
-          </div>
-        </div>
+          </div> -->
+    
         
         <div class="form-group">
           <div class="col-md-12">
