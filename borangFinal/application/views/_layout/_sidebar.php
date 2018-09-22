@@ -96,13 +96,23 @@
           <span>Data Borang</span>
         </a>
       </li> -->
+      <?php 
+        $menu = explode(',', $_SESSION['nama_modul']);
+
+        foreach ($menu as $value) {  ?>
+          <li <?php if ($value == 'menu') {echo 'class="active"';} ?>>
+            <a href="<?php echo base_url('Menu/detail/'.$value); ?>">
+              <i class="fa fa-user"></i>
+              <span><?php echo $value; ?></span>
+            </a>
+          </li>       
+        <?php } ?>
        <li <?php if ($page == 'profile') {echo 'class="active"';} ?>>
         <a href="<?php echo base_url('Profile'); ?>">
           <i class="fa fa-cog"></i>
           <span>Setting Akun</span>
         </a>
       </li>
-      
       <!-- <div class="dropdown">
         <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Example
         <span class="caret"></span></button>

@@ -28,7 +28,7 @@ class M_CreateTable extends CI_Model {
 		$gabungan_kata = implode(",", $inputan_form);
 
 		$isi_form = "";
-		$isi_kolom = "";
+		$isi_kolom = ",id VARCHAR(100) NOT NULL";
 
 		
 		

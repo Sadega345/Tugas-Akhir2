@@ -37,29 +37,21 @@ class Auth extends CI_Controller {
 					'status' => "Loged in"
 				];
 				$this->session->set_userdata($session);
-				$sql = "SELECT u.user_id, p.role_id,p.data_user,p.instrumen,p.borang,p.standar,p.mhslulusan,p.fakultas,p.prodi,p.keuangan,p.logistik,p.dosen,p.jurnalilmiah FROM permission p INNER JOIN USER u WHERE p.role_id=u.role_id AND u.username="."'$username '"."AND u.pwd="."'$password'";
+				$sql = "SELECT u.username,rp.nama_modul FROM USER u,role_permission rp WHERE u.role_id=rp.role_id AND u.username='".$username."' ";
 
 				$data = $this->db->query($sql);
 				
 				$result = $data->row();
 
 				   var_dump($result->fakultas);
-			       $session_data = array(
-					'data_user' => $result->data_user,
-					'instrumen' => $result->instrumen,
-					'borang' => $result->borang,
-					'standar' => $result->standar,
-					'mhslulusan' => $result->mhslulusan,
-					'fakultas' => $result->fakultas,
-
-					'prodi' => $result->prodi,
-					'keuangan' => $result->keuangan,
-					'logistik' => $result->logistik,
-					'dosen' => $result->dosen,
-					'jurnalilmiah' => $result->jurnalilmiah,
+			       $session_menu = array(
+					'nama_modul' => $result->nama_modul,
+					'username' => $result->username,
+					'firstname' => $result->firstname,
+					'lastname' => $result->lastname,
 					'user_id' => $result->user_id
 				);
-				$this->session->set_userdata($session_data);
+				$this->session->set_userdata($session_menu);
 				
 				// echo  $this->session->userdata('fakultas');
 				redirect('Home');

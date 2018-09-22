@@ -22,21 +22,15 @@
         <!-- Checkbox -->
         <div class="input-group form-group">      
         <?php
-        $idx = 0;
+        
         foreach ($dataMenu as $menu) {
           ?>
-            <input type="hidden" name="id[]" value="<?php echo $menu->id_historis; ?>">
-            <input type="checkbox" name="menu[]" value="<?php echo $menu->nama_table; ?>" >
-          <?php echo $menu->nama_table."<br>"; ?>
-
-            <input type="checkbox" name="menu[]" value="<?php echo $menu->nama_table; ?>" <?php if($menu->nama_table == $dataManageUser->nama_modul){ echo "checked"; }else{ echo $menu->nama_table; ?> >
-          <?php echo $menu->nama_table."<br>"; ?>
+            
+          <input type="checkbox" name="daftarmenu[]" value="<?php echo $menu->nama_table; ?>" <?php if( $menu->nama_table == $dataManageUser->nama_modul){ echo "checked"; }?>>
+          <?php echo $menu->nama_table; ?>
+       
           <br>
-          <?php }  ?>
-          
-          <?php
-        }
-        ?>    
+        <?php } ?>
         </div>
 
         <!-- <div class="row">

@@ -3,10 +3,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_User extends CI_Model {
 	public function select_all() {
-		$this->db->select('*');
-		$this->db->from('user');
+		// $this->db->select('u.user_id,u.username,u.pwd,u.firstname,u.lastname,r.role_name,r.role_id');
+		// $this->db->from('user u,role r');
 
-		$data = $this->db->get();
+		$sql = "SELECT DISTINCT u.user_id,u.username,u.pwd,u.firstname,u.lastname,r.role_name FROM USER u INNER JOIN role r ON u.role_id=r.role_id";
+
+		// $data = $this->db->get();
+
+		$data = $this->db->query($sql);
 
 		return $data->result();
 	}

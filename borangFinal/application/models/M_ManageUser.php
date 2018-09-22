@@ -43,7 +43,6 @@ class M_ManageUser extends CI_Model {
 	public function select_historis(){
 		$sql = "SELECT * FROM mst_historis ";
 
-
 		$data = $this->db->query($sql);
 
 		return $data->result();
@@ -83,29 +82,21 @@ class M_ManageUser extends CI_Model {
 	}
 
 	public function update($data) {
-		$sqlDataUser = "";
+		$menu = $data['daftarmenu'];
+		$gabunganMenu = implode(',',$menu);
 
-		if(isset($data['datauser'])){
-			$sqlDataUser .= " data_user = '".$data['datauser']."',";
+		for($i=0; $i < count($menu); $i++){
+			$sql = "UPDATE role_permission SET 
+					role_id = '".$data['role']."', 
+					nama_modul = '".$gabunganMenu."'
+					WHERE permission_id = '".$data['id']."'
+				";
 		}
-		if(isset($data['instrumen'])){
-			$sqlDataUser .= " instrumen = '".$data['instrumen']."',";
-		}
-		if(isset($data['borang'])){
-			$sqlDataUser .= " borang = '".$data['borang']."',";
-		}
-		if(isset($data['standar'])){
-			$sqlDataUser .= " standar = '".$data['standar']."',";
-		}
-
-		$cekkoma = substr($sqlDataUser, (strlen($sqlDataUser)-1));
-		if($cekkoma==","){
-			$sqlDataUser = substr($sqlDataUser,1,(strlen($sqlDataUser)-2));
-		}
-		$sql = "UPDATE permission SET 
-						".$sqlDataUser."
-						WHERE role_id=" .$data['id'];
-
+		// $sql = "UPDATE role_permission SET 
+		// 			role_id = '".$data['role']."', 
+		// 			nama_modul = '".$menu."'
+		// 			WHERE permission_id = '".$data['id']."'
+		// 		";
 
 		$this->db->query($sql);
 
