@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>AdminCRUD | Dashboard</title>
+    <title>Borang Akreditasi</title>
     <!-- meta -->
     <?php echo @$_meta; ?>
 

@@ -43,7 +43,7 @@
             <?php
             foreach ($dataRole as $data) {
               ?>
-              <option value="<?php echo $data->role_id; ?>" <?php if($data->role_id == $dataUser->role_id){echo "selected='selected'";} ?>><?php echo $data->role_name; ?></option>
+              <option name="role" value="<?php echo $data->role_id; ?>" <?php if($data->role_id == $dataUser->role_id){echo "selected='selected'";} ?>><?php echo $data->role_name; ?></option>
               <?php
             }
             ?>

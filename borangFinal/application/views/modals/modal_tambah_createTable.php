@@ -47,7 +47,7 @@
       </span>
       <select name="jmlkolom" id="jmlkolom" onchange="javascript:generateKolom(this)" aria-describedby="sizing-addon2" class="form-control ">
         <option disabled selected="">Jumlah Kolom</option>
-        <?php for($i =1; $i <=15; $i++){echo "<option value='".$i."'>".$i."</option>";}?>
+        <?php for($i =1; $i <=20; $i++){echo "<option value='".$i."'>".$i."</option>";}?>
         
       </select>
     </div>

@@ -34,12 +34,6 @@ class M_Menu extends CI_Model {
 		}
 		$query_temp = substr($query_temp, 1);
 		$query = "INSERT INTO ".$data['tabel']." values(".$query_temp.")";
-
-		// $sql = "INSERT INTO 3_4_5_lembaga_yang_memesan_lulusan_untuk_bekerja VALUES (
-		// 		$data['Nama3'],
-		// 		$data['Alamat3'],
-		// 		$data['id']
-		// 		)";
       
        $this->db->query($query);
 

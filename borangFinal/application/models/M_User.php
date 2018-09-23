@@ -25,7 +25,7 @@ class M_User extends CI_Model {
 	}
 
 	public function select_role_byid($id){
-		$sql = "SELECT u.role_id,r.role_name FROM USER u INNER JOIN role r WHERE r.role_id='{$id}'";
+		$sql = "SELECT u.role_id,r.role_name FROM USER u INNER JOIN role r WHERE r.role_id=".$id;
 
 		$data = $this->db->query($sql);
 
@@ -61,8 +61,8 @@ class M_User extends CI_Model {
 						username='" .$data['username'] ."',
 						pwd='" .$data['pwd'] ."',
 						firstname='" .$data['firstname'] ."',
-						lastname='" .$data['lastname'] ."'
-
+						lastname='" .$data['lastname'] ."',
+						role_id='" .$data['role'] ."'
 						WHERE user_id='" .$data['id'] ."'";
 
 		$this->db->query($sql);
