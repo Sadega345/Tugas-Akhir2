@@ -16,6 +16,7 @@
 		tampilManageUser();
 		tampilInstrumen();
 		tampilStandar();
+		tampilFakultas();
 		tampilButir();
 		tampilCreateTable();
 		<?php
@@ -688,7 +689,7 @@
 	})
 	$(document).on("click", ".hapus-dataStandar", function() {
 		var id = id_standar;
-		alert(id);
+		// alert(id);
 		$.ajax({
 			method: "POST",
 			url: "<?php echo base_url('ManageStandar/delete'); ?>",
@@ -774,6 +775,112 @@
 	})
 
 	$('#update-manageStandar').on('hidden.bs.modal', function () {
+	  $('.form-msg').html('');
+	})
+
+	//Manage Fakultas
+
+	function tampilFakultas() {
+		$.get('<?php echo base_url('ManageFakultas/tampil'); ?>', function(data) {
+			MyTable.fnDestroy();
+			$('#data-manageFakultas').html(data);
+			refresh();
+		});
+	}
+
+	var id_fakultas;
+	$(document).on("click", ".konfirmasiHapus-manageFakultas", function() {
+		id_fakultas = $(this).attr("data-id");
+		
+	})
+	$(document).on("click", ".hapus-dataFakultas", function() {
+		var id = id_fakultas;
+		// alert(id);
+		$.ajax({
+			method: "POST",
+			url: "<?php echo base_url('ManageFakultas/delete'); ?>",
+			data: "id=" +id
+		})
+		.done(function(data) {
+			$('#konfirmasiHapus').modal('hide');
+			tampilFakultas();
+			$('.msg').html(data);
+			effect_msg();
+		})
+	})
+
+	$(document).on("click", ".update-datamanageFakultas", function() {
+		var id = $(this).attr("data-id");
+		// alert(id)
+		$.ajax({
+			method: "POST",
+			url: "<?php echo base_url('ManageFakultas/update'); ?>",
+			data: "id=" +id
+		})
+		.done(function(data) {
+			// alert('tes');
+			$('#ubah-manageFakultas').html(data);
+			$('#ubah-managefakultas').modal('show');
+		})
+	})
+
+	$('#form-tambah-manageFakultas').submit(function(e) {
+		var data = $(this).serialize();
+		// alert('masuk');
+		$.ajax({
+			method: 'POST',
+			url: '<?php echo base_url('ManageFakultas/prosesTambah'); ?>',
+			data: data
+		})
+		.done(function(data) {
+			var out = jQuery.parseJSON(data);
+			
+			tampilFakultas();
+			if (out.status == 'form') {
+				$('.form-msg').html(out.msg);
+				effect_msg_form();
+			} else {
+				document.getElementById("form-tambah-manageFakultas").reset();
+				$('#tambah-manageFakultas').modal('hide');
+				$('.msg').html(out.msg);
+				effect_msg();
+			}
+		})
+		
+		e.preventDefault();
+	});
+
+	$(document).on('submit', '#form-update-manageFakultas', function(e){
+		var data = $(this).serialize();
+
+		$.ajax({
+			method: 'POST',
+			url: '<?php echo base_url('ManageFakultas/prosesUpdate'); ?>',
+			data: data
+		})
+		.done(function(data) {
+			var out = jQuery.parseJSON(data);
+
+			tampilFakultas();
+			if (out.status == 'form') {
+				$('.form-msg').html(out.msg);
+				effect_msg_form();
+			} else {
+				document.getElementById("form-update-manageFakultas").reset();
+				$('#ubah-managefakultas').modal('hide');
+				$('.msg').html(out.msg);
+				effect_msg();
+			}
+		})
+		
+		e.preventDefault();
+	});
+
+	$('#tambah-manageFakultas').on('hidden.bs.modal', function () {
+	  $('.form-msg').html('');
+	})
+
+	$('#update-manageFakultas').on('hidden.bs.modal', function () {
 	  $('.form-msg').html('');
 	})
 

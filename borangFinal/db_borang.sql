@@ -15,22 +15,6 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/`db_borang` /*!40100 DEFAULT CHARACTER S
 
 USE `db_borang`;
 
-/*Table structure for table `3_4_5_lembaga_yang_memesan_lulusan_untuk_bekerja` */
-
-DROP TABLE IF EXISTS `3_4_5_lembaga_yang_memesan_lulusan_untuk_bekerja`;
-
-CREATE TABLE `3_4_5_lembaga_yang_memesan_lulusan_untuk_bekerja` (
-  `id` varchar(100) NOT NULL,
-  `Nama` varchar(100) NOT NULL,
-  `Alamat` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-/*Data for the table `3_4_5_lembaga_yang_memesan_lulusan_untuk_bekerja` */
-
-LOCK TABLES `3_4_5_lembaga_yang_memesan_lulusan_untuk_bekerja` WRITE;
-
-UNLOCK TABLES;
-
 /*Table structure for table `mst_butir` */
 
 DROP TABLE IF EXISTS `mst_butir`;
@@ -45,14 +29,16 @@ CREATE TABLE `mst_butir` (
   PRIMARY KEY (`butir_id`),
   KEY `FK_mst_butir` (`standar_id`),
   KEY `FK_mst_butir_type_borang` (`type_borang`),
-  KEY `FK_mst_butir_study` (`study_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=latin1;
+  KEY `FK_mst_butir_study` (`study_id`),
+  CONSTRAINT `FK_mst_butir_study` FOREIGN KEY (`study_id`) REFERENCES `mst_study` (`study_id`),
+  CONSTRAINT `FK_mst_butir_type_borang` FOREIGN KEY (`type_borang`) REFERENCES `mst_typeborang` (`type_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=latin1;
 
 /*Data for the table `mst_butir` */
 
 LOCK TABLES `mst_butir` WRITE;
 
-insert  into `mst_butir`(`butir_id`,`butir_name`,`title`,`standar_id`,`type_borang`,`study_id`) values (1,'4.9.1','DATA MAHASISWA REGULER',4,1,3),(2,'3.1.1','JUMLAH MAHASISWA REGULER',4,1,3),(3,'3.4.1','EVALUASI KINERJA LULUSAN',3,1,3),(4,'3.4.5','LEMBAGA YANG MEMESAN LULUSAN UNTUK BEKERJA',3,1,3),(5,'4.3.1','DOSEN TETAP YANG BIDANG KEAHLIANNYA SESUAI BIDANG PS',4,1,3),(6,'4.3.2','DOSEN TETAP YANG BIDANG KEAHLIANNYA DI LUAR PS',4,1,3),(7,'4.3.3','AKTIVITAS DOSEN TETAP YANG BIDANG KEAHLIANNYA SESUAI DENGAN PS',4,1,3),(8,'4.3.4','AKTIVITAS MENGAJAR DOSEN TETAP YANG BIDANG KEAHLIANNYA SESUAI DENGAN PS   ',4,1,3),(9,'4.3.5','AKTIVITAS MENGAJAR DOSEN TETAP YANG BIDANG KEAHLIANNYA DI LUAR PS      ',4,1,3),(10,'4.4.1','DATA DOSEN TIDAK TETAP',4,1,3),(11,'4.4.2','AKTIVITAS MENGAJAR DATA DOSEN TIDAK TETAP ',4,1,3),(12,'4.5.1','KEGIATAN TENAGA AHLI/PAKAR (TIDAK TERMASUK DOSEN TETAP)',4,1,3),(13,'4.5.2','PENINGKATAN KEMAMPUAN DOSEN TETAP MELALUI TUGAS BELAJAR',4,1,3),(14,'4.5.3','KEGIATAN DOSEN TETAP DALAM SEMINAR DLL',4,1,3),(15,'4.5.5','KEIKUTSERTAAN DOSEN TETAP DALAM ORGANISASI KEILMUAN/PROFESI',4,1,3),(16,'4.6.1','TENAGA KEPENDIDIKAN',4,1,3),(17,'5.1.2.1','STRUKTUR KURIKULUM BERDASARKAN URUTAN MK',5,1,3),(18,'5.2.2','WAKTU PELAKSANAAN REAL PROSES BELAJAR MENGAJAR',5,1,3),(19,'5.4.1','DOSEN PEMBIMBING AKADEMIK DAN JUMLAH MAHASISWA',5,1,3),(20,'5.5.2','PELAKSANAAN PEMBIMBINGAN TUGAS AKHIR / SKRIPSI',5,1,3),(21,'6.2.1.1','PEROLEHAN DAN ALOKASI DANA',6,1,3),(22,'6.2.1.2','PENGGUNAAN DANA',6,1,3),(23,'6.2.2','DANA UNTUK KEGIATAN PENELITIAN',6,1,3),(24,'6.2.3','DANA PELAYANAN/PENGABDIAN KEPADA MASYARAKAT',6,1,3),(25,'6.3.1','DATA RUANG KERJA DOSEN TETAP',6,1,3),(26,'6.4.1','KETERSEDIAAN PUSTAKA YANG RELEVAN',6,1,3),(27,'6.5.2','AKSESIBILITAS TIAP JENIS DATA',6,1,3),(28,'7.1.1','PENELITIAN DOSEN TETAP',7,1,3),(29,'7.1.2','JUDUL ARTIKEL ILMIAH/KARYA ILMIAH/KARYA SENI/BUKU   ',7,1,3),(30,'7.2.1','KEGIATAN PELAYANAN/PENGABDIAN KEPADA MASYARAKAT (PKM)',7,1,3),(31,'3.1.3','DATA MAHASISWA REGULER DAN NON REGULER',0,0,0),(32,'3.2.1','RATA-RATA MASA STUDI DAN IPK',3,2,3),(33,'4.1.1','DOSEN TETAP YANG BIDANG KEAHLIANNYA SESUAI BIDANG PS',4,2,3),(34,'4.1.2','PENGGANTIAN DAN PENGEMBANGAN DOSEN TETAP',4,2,3),(35,'4,2','TENAGA KEPENDIDIKAN',4,2,3),(36,'6.1.1.1','JUMLAH DANA YANG DITERIMA FAKULTAS',6,2,3),(37,'6.1.1.2','PENGGUNAAN DANA',6,2,3),(38,'6.1.1.3','PENGGUNAAN DANA KEGIATAN TRIDARMA',6,2,3),(39,'6.4.2','AKSESIBILITAS DATA',6,2,3),(40,'7.1.1','JUMLAH DAN DANA PENELITIAN',7,2,3),(41,'7.2.1','JUMLAH DAN DANA KEGIATAN PELAYANAN / PENGABDIAN KEPADA MASYARAKAT',7,2,3),(51,'7.2.2','JUMLAH DAN DANA KEGIATAN SOSIAL',7,2,3);
+insert  into `mst_butir`(`butir_id`,`butir_name`,`title`,`standar_id`,`type_borang`,`study_id`) values (1,'4.9.1','DATA MAHASISWA REGULER',4,1,3),(2,'3.1.3','JUMLAH MAHASISWA REGULER',3,1,3),(3,'3.4.1','EVALUASI KINERJA LULUSAN',3,1,3),(4,'3.4.5','LEMBAGA YANG MEMESAN LULUSAN UNTUK BEKERJA',3,1,3),(5,'4.3.1','DOSEN TETAP YANG BIDANG KEAHLIANNYA SESUAI BIDANG PS',4,1,3),(6,'4.3.2','DOSEN TETAP YANG BIDANG KEAHLIANNYA DI LUAR PS',4,1,3),(7,'4.3.3','AKTIVITAS DOSEN TETAP YANG BIDANG KEAHLIANNYA SESUAI DENGAN PS',4,1,3),(8,'4.3.4','AKTIVITAS MENGAJAR DOSEN TETAP YANG BIDANG KEAHLIANNYA SESUAI DENGAN PS   ',4,1,3),(9,'4.3.5','AKTIVITAS MENGAJAR DOSEN TETAP YANG BIDANG KEAHLIANNYA DI LUAR PS      ',4,1,3),(10,'4.4.1','DATA DOSEN TIDAK TETAP',4,1,3),(11,'4.4.2','AKTIVITAS MENGAJAR DATA DOSEN TIDAK TETAP ',4,1,3),(12,'4.5.1','KEGIATAN TENAGA AHLI/PAKAR (TIDAK TERMASUK DOSEN TETAP)',4,1,3),(13,'4.5.2','PENINGKATAN KEMAMPUAN DOSEN TETAP MELALUI TUGAS BELAJAR',4,1,3),(14,'4.5.3','KEGIATAN DOSEN TETAP DALAM SEMINAR DLL',4,1,3),(15,'4.5.5','KEIKUTSERTAAN DOSEN TETAP DALAM ORGANISASI KEILMUAN/PROFESI',4,1,3),(16,'4.6.1','TENAGA KEPENDIDIKAN',4,1,3),(17,'5.1.2.1','STRUKTUR KURIKULUM BERDASARKAN URUTAN MK',5,1,3),(18,'5.2.2','WAKTU PELAKSANAAN REAL PROSES BELAJAR MENGAJAR',5,1,3),(19,'5.4.1','DOSEN PEMBIMBING AKADEMIK DAN JUMLAH MAHASISWA',5,1,3),(20,'5.5.2','PELAKSANAAN PEMBIMBINGAN TUGAS AKHIR / SKRIPSI',5,1,3),(21,'6.2.1.1','PEROLEHAN DAN ALOKASI DANA',6,1,3),(22,'6.2.1.2','PENGGUNAAN DANA',6,1,3),(23,'6.2.2','DANA UNTUK KEGIATAN PENELITIAN',6,1,3),(24,'6.2.3','DANA PELAYANAN/PENGABDIAN KEPADA MASYARAKAT',6,1,3),(25,'6.3.1','DATA RUANG KERJA DOSEN TETAP',6,1,3),(26,'6.4.1','KETERSEDIAAN PUSTAKA YANG RELEVAN',6,1,3),(27,'6.5.2','AKSESIBILITAS TIAP JENIS DATA',6,1,3),(28,'7.1.1','PENELITIAN DOSEN TETAP',7,1,3),(29,'7.1.2','JUDUL ARTIKEL ILMIAH/KARYA ILMIAH/KARYA SENI/BUKU   ',7,1,3),(30,'7.2.1','KEGIATAN PELAYANAN/PENGABDIAN KEPADA MASYARAKAT (PKM)',7,1,3),(31,'3.1.2','DATA MAHASISWA REGULER DAN NON REGULER',3,2,3),(32,'3.2.1','RATA-RATA MASA STUDI DAN IPK',3,2,3),(33,'4.1.1','DOSEN TETAP YANG BIDANG KEAHLIANNYA SESUAI BIDANG PS',4,2,3),(34,'4.1.2','PENGGANTIAN DAN PENGEMBANGAN DOSEN TETAP',4,2,3),(35,'4,2','TENAGA KEPENDIDIKAN',4,2,3),(36,'6.1.1.1','JUMLAH DANA YANG DITERIMA FAKULTAS',6,2,3),(37,'6.1.1.2','PENGGUNAAN DANA',6,2,3),(38,'6.1.1.3','PENGGUNAAN DANA KEGIATAN TRIDARMA',6,2,3),(39,'6.4.2','AKSESIBILITAS DATA',6,2,3),(40,'7.1.1','JUMLAH DAN DANA PENELITIAN',7,2,3),(41,'7.2.1','JUMLAH DAN DANA KEGIATAN PELAYANAN / PENGABDIAN KEPADA MASYARAKAT',7,2,3),(51,'7.2.2','JUMLAH DAN DANA KEGIATAN SOSIAL',7,2,3),(52,'7.2.2','JUMLAH DAN DANA KEGIATAN SOSIAL',7,2,3),(53,'7.2.2','JUMLAH DAN DANA KEGIATAN SOSIAL',7,2,3),(54,'7.2.2','JUMLAH DAN DANA KEGIATAN SOSIAL',7,2,3),(55,'7.2.2','JUMLAH DAN DANA KEGIATAN SOSIAL',7,2,3),(56,'7.2.2','JUMLAH DAN DANA KEGIATAN SOSIAL',7,2,3),(57,'7.2.2','JUMLAH DAN DANA KEGIATAN SOSIAL',7,2,3),(58,'7.2.2','JUMLAH DAN DANA KEGIATAN SOSIAL',7,2,3),(59,'7.2.2','JUMLAH DAN DANA KEGIATAN SOSIAL',7,2,3),(60,'7.2.2','JUMLAH DAN DANA KEGIATAN SOSIAL',7,2,3),(61,'7.2.2','JUMLAH DAN DANA KEGIATAN SOSIAL',7,2,3),(62,'7.2.2','JUMLAH DAN DANA KEGIATAN SOSIAL',7,2,3),(63,'7.2.2','JUMLAH DAN DANA KEGIATAN SOSIAL',7,2,3),(64,'7.2.2','JUMLAH DAN DANA KEGIATAN SOSIAL',7,2,3),(65,'7.2.2','JUMLAH DAN DANA KEGIATAN SOSIAL',7,2,3),(66,'7.2.2','JUMLAH DAN DANA KEGIATAN SOSIAL',7,2,3),(67,'7.2.2','JUMLAH DAN DANA KEGIATAN SOSIAL',7,2,3),(68,'7.2.2','JUMLAH DAN DANA KEGIATAN SOSIAL',7,2,3),(69,'7.2.2','JUMLAH DAN DANA KEGIATAN SOSIAL',7,2,3),(70,'7.2.2','JUMLAH DAN DANA KEGIATAN SOSIAL',7,2,3),(71,'7.2.2','JUMLAH DAN DANA KEGIATAN SOSIAL',7,2,3),(72,'7.2.2','JUMLAH DAN DANA KEGIATAN SOSIAL',7,2,3),(73,'7.2.2','JUMLAH DAN DANA KEGIATAN SOSIAL',7,2,3),(74,'7.2.2','JUMLAH DAN DANA KEGIATAN SOSIAL',7,2,3),(75,'7.2.2','JUMLAH DAN DANA KEGIATAN SOSIAL',7,2,3),(76,'7.2.2','JUMLAH DAN DANA KEGIATAN SOSIAL',7,2,3),(77,'7.2.2','JUMLAH DAN DANA KEGIATAN SOSIAL',7,2,3),(78,'7.2.2','JUMLAH DAN DANA KEGIATAN SOSIAL',7,2,3),(79,'7.2.2','JUMLAH DAN DANA KEGIATAN SOSIAL',7,2,3),(80,'7.2.2','JUMLAH DAN DANA KEGIATAN SOSIAL',7,2,3),(81,'7.2.2','JUMLAH DAN DANA KEGIATAN SOSIAL',7,2,3),(82,'7.2.2','JUMLAH DAN DANA KEGIATAN SOSIAL',7,2,3),(83,'7.2.2','JUMLAH DAN DANA KEGIATAN SOSIAL',7,2,3),(84,'7.2.2','JUMLAH DAN DANA KEGIATAN SOSIAL',7,2,3),(85,'7.2.2','JUMLAH DAN DANA KEGIATAN SOSIAL',7,2,3),(87,'4.9.3','4',0,1,5);
 
 UNLOCK TABLES;
 
@@ -92,27 +78,6 @@ insert  into `mst_gender`(`gender_id`,`gender_name`) values (1,'Laki-laki'),(2,'
 
 UNLOCK TABLES;
 
-/*Table structure for table `mst_historis` */
-
-DROP TABLE IF EXISTS `mst_historis`;
-
-CREATE TABLE `mst_historis` (
-  `id_historis` int(11) NOT NULL AUTO_INCREMENT,
-  `judul_butir` varchar(100) DEFAULT NULL,
-  `isi_form` varchar(100) DEFAULT NULL,
-  `id_butir` int(11) DEFAULT NULL,
-  `nama_table` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id_historis`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
-
-/*Data for the table `mst_historis` */
-
-LOCK TABLES `mst_historis` WRITE;
-
-insert  into `mst_historis`(`id_historis`,`judul_butir`,`isi_form`,`id_butir`,`nama_table`) values (31,'3_4_5_LEMBAGA_YANG_MEMESAN_LULUSAN_UNTUK_BEKERJA','Nama,Alamat,',4,'3_4_5_lembaga_yang_memesan_lulusan_untuk_bekerja');
-
-UNLOCK TABLES;
-
 /*Table structure for table `mst_lecturer` */
 
 DROP TABLE IF EXISTS `mst_lecturer`;
@@ -143,22 +108,6 @@ CREATE TABLE `mst_lecturer` (
 /*Data for the table `mst_lecturer` */
 
 LOCK TABLES `mst_lecturer` WRITE;
-
-UNLOCK TABLES;
-
-/*Table structure for table `mst_mahasiswa` */
-
-DROP TABLE IF EXISTS `mst_mahasiswa`;
-
-CREATE TABLE `mst_mahasiswa` (
-  `ID` int(3) NOT NULL,
-  `nama_mahasiswa` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-/*Data for the table `mst_mahasiswa` */
-
-LOCK TABLES `mst_mahasiswa` WRITE;
 
 UNLOCK TABLES;
 
@@ -312,18 +261,13 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `role_permission`;
 
 CREATE TABLE `role_permission` (
-  `permission_id` int(4) NOT NULL AUTO_INCREMENT,
   `role_id` int(4) DEFAULT NULL,
-  `id_historis` int(4) DEFAULT NULL,
-  `nama_modul` varchar(250) DEFAULT NULL,
-  PRIMARY KEY (`permission_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
+  `permission_id` int(4) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `role_permission` */
 
 LOCK TABLES `role_permission` WRITE;
-
-insert  into `role_permission`(`permission_id`,`role_id`,`id_historis`,`nama_modul`) values (19,1,28,'3_4_5_lembaga_yang_memesan_lulusan_untuk_bekerja');
 
 UNLOCK TABLES;
 
@@ -401,7 +345,9 @@ CREATE TABLE `tbl_usermajor` (
   `user_id` int(4) DEFAULT NULL,
   `major_id` varchar(5) DEFAULT NULL,
   KEY `FK_tbl_usermajor_user` (`user_id`),
-  KEY `FK_tbl_usermajor_major` (`major_id`)
+  KEY `FK_tbl_usermajor_major` (`major_id`),
+  CONSTRAINT `FK_tbl_usermajor_major` FOREIGN KEY (`major_id`) REFERENCES `mst_major` (`major_id`),
+  CONSTRAINT `FK_tbl_usermajor_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `tbl_usermajor` */
@@ -426,14 +372,16 @@ CREATE TABLE `user` (
   `gender_id` int(4) DEFAULT NULL,
   PRIMARY KEY (`user_id`),
   KEY `FK_user` (`role_id`),
-  KEY `FK_user_gender` (`gender_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+  KEY `FK_user_gender` (`gender_id`),
+  CONSTRAINT `FK_user` FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`),
+  CONSTRAINT `FK_user_gender` FOREIGN KEY (`gender_id`) REFERENCES `mst_gender` (`gender_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 /*Data for the table `user` */
 
 LOCK TABLES `user` WRITE;
 
-insert  into `user`(`user_id`,`username`,`pwd`,`firstname`,`lastname`,`role_id`,`gender_id`) values (11,'teguh','prabowo','Teguh','Prabowo',1,1);
+insert  into `user`(`user_id`,`username`,`pwd`,`firstname`,`lastname`,`role_id`,`gender_id`) values (1,'admin','admin','Teguh','Prabowo',7,1),(2,'d3mi','d3mi','Erna','Hikmawati',1,2),(3,'s1ti','s1ti','Soleh','Sabarudin',1,1),(4,'mulyani','mulyani','Mulyani',NULL,2,2),(5,'endang','endang','Endang',NULL,3,2),(6,'nina','nina','Nina','Rustiani',4,2),(7,'norman','norman','Norman',NULL,5,1),(8,'teguh','prabowo','sadega','prabowo',2,1),(9,'teguh','sadega','teguh','prabowo',1,1);
 
 UNLOCK TABLES;
 

@@ -33,34 +33,40 @@
 
       <li <?php if ($page == 'manageStandar') {echo 'class="active"';} ?>>
         <a href="<?php echo base_url('ManageStandar'); ?>">
-          <i class="fa fa-user"></i>
+          <i class="fa fa-briefcase"></i>
           <span>Master Data Standar</span>
         </a>
       </li>
 
       <li <?php if ($page == 'masterButir') {echo 'class="active"';} ?>>
         <a href="<?php echo base_url('MasterButir'); ?>">
-          <i class="fa fa-user"></i>
+          <i class="fa fa-briefcase"></i>
           <span>Master Data Butir</span>
         </a>
       </li>
 
       <li <?php if ($page == 'createTable') {echo 'class="active"';} ?>>
         <a href="<?php echo base_url('CreateTable'); ?>">
-          <i class="fa fa-user"></i>
+          <i class="fa fa-briefcase"></i>
           <span>Manage Data Butir</span>
         </a>
       </li>
 
-      <?php 
+      <li <?php if ($page == 'manageFakulatas') {echo 'class="active"';} ?>>
+        <a href="<?php echo base_url('ManageFakultas'); ?>">
+          <i class="fa fa-briefcase"></i>
+          <span>Manage Fakultas</span>
+        </a>
+      </li>
+      
+    <li <?php if ($page == 'Instrumen') {echo 'class="active"';} ?>>
+        <a href="<?php echo base_url('Instrumen'); ?>">
+          <i class="fa fa-file"></i>
+          <span>Instrumen</span>
+        </a>
+    </li>
 
-     //  foreach ($_listmenu as $value ){
-
-
-     //   }
-      ?>
-        
-   
+    
 
       <?php if($this->session->userdata('fakultas') != ""){?>
         <li <?php if ($page == 'Fakultas') {echo 'class="active"';} ?>>
@@ -102,7 +108,7 @@
         foreach ($menu as $value) {  ?>
           <li <?php if ($value == 'menu') {echo 'class="active"';} ?>>
             <a href="<?php echo base_url('Menu/detail/'.$value); ?>">
-              <i class="fa fa-user"></i>
+              <i class="fa fa-briefcase"></i>
               <span><?php echo $value; ?></span>
             </a>
           </li>       

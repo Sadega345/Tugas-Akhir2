@@ -40,7 +40,6 @@
 				<button class="btn btn-danger konfirmasiHapus-datahasilMenu" data-id="<?php echo $menu->id; ?>" data-toggle="modal" data-target="#konfirmasiHapus" name="id"><i class="glyphicon glyphicon-remove-sign"></i> Delete </button>
 			</td>
 		</tr>
-		
 
 	<?php } ?>
 	</tbody>
